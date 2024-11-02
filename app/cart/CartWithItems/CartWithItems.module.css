@@ -1,0 +1,60 @@
+.cartWithItems {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 3fr 2fr 2fr 1fr;
+  grid-column-gap: 1rem;
+  padding: 1.5rem 2.5rem;
+
+  box-shadow: 0 0 2px 0 rgba(164, 163, 163, 1);
+  border-radius: 0.25rem;
+}
+
+.row > div {
+  display: flex;
+  align-items: center;
+}
+
+.total {
+  border: 1px solid rgba(0, 0, 0, 0.6);
+  border-radius: 0.25rem;
+  width: 260px;
+  padding: 1rem;
+  align-self: flex-end;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.total > h3 {
+  margin: 0 0 0.5rem 0;
+  font-weight: 550;
+}
+
+.total > hr {
+  margin: 0;
+  width: 100%;
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.totalRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.total > button {
+  align-self: center;
+  color: white;
+  padding: 1rem 2.5rem;
+  background-color: #db4444;
+  border: none;
+  border-radius: 0.25rem;
+
+  cursor: pointer;
+}

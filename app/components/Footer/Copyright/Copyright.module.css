@@ -1,0 +1,18 @@
+.copyrightWrapper {
+  margin-top: 2rem;
+  border-top: 1px solid #1d1d1d;
+}
+
+.copyright {
+  color: #3d3d3d;
+  text-align: center;
+  padding: 1.5rem var(--padding);
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.copyright > a {
+  color: #3d3d3d;
+  text-decoration: none;
+  font-weight: bold;
+}

@@ -1,0 +1,9 @@
+.contentWrapper {
+  max-width: var(--max-width);
+  padding: 0 var(--padding);
+  margin: 2rem auto;
+}
+
+.contentWrapper > h1 {
+  margin: 0;
+}
