@@ -3,7 +3,7 @@ import { ValuesContext } from "../NavbarChildrenWrapper/NavbarChildrenWrapper";
 import { useContext } from "react";
 import Link from "next/link";
 
-export default function Navbar() {
+const Navbar = () => {
   const { cart, wishlist } = useContext(ValuesContext);
 
   return (
@@ -26,14 +26,16 @@ export default function Navbar() {
           </div>
           <Link href='/wishlist' className={styles.action}>
             <img src='./img/navbar/heart.png' alt='Wishlist' />
-            {wishlist.length !== 0 ? <div>{wishlist.length}</div> : null}
+            {wishlist.length !== 0 && <div>{wishlist.length}</div>}
           </Link>
           <Link href='/cart' className={styles.action}>
             <img src='./img/navbar/cart.png' alt='Cart' />
-            {cart.length !== 0 ? <div>{cart.length}</div> : null}
+            {cart.length !== 0 && <div>{cart.length}</div>}
           </Link>
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default Navbar;
