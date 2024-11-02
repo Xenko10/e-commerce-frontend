@@ -1,40 +1,45 @@
 # Content
 
+- [About] (#About)
 - [Preview](#Preview)
 - [How to run this project?](#How-to-run-this-project)
 - [Figma design credits](#Figma-Design-credits)
+
+## About
+
+This project is a continuation of the e-commerce project (https://github.com/Xenko10/e-commerce).
 
 ## Preview
 
 ### Home
 
-![Home](https://github.com/Xenko10/e-commerce/blob/master/public/readme-img/home.png)
+![Home](https://github.com/Xenko10/e-commerce-frontend/blob/master/public/readme-img/home.png)
 
 ### Flash Sales
 
-![Flash Sales](https://github.com/Xenko10/e-commerce/blob/master/public/readme-img/flashsales.gif)
+![Flash Sales](https://github.com/Xenko10/e-commerce-frontend/blob/master/public/readme-img/flashsales.gif)
 
 ### Product
 
-![Product](https://github.com/Xenko10/e-commerce/blob/master/public/readme-img/product.png)
+![Product](https://github.com/Xenko10/e-commerce-frontend/blob/master/public/readme-img/product.png)
 
 ### Wishlist
 
-![Wishlist](https://github.com/Xenko10/e-commerce/blob/master/public/readme-img/wishlist.png)
+![Wishlist](https://github.com/Xenko10/e-commerce-frontend/blob/master/public/readme-img/wishlist.png)
 
 ### Cart
 
-![Cart](https://github.com/Xenko10/e-commerce/blob/master/public/readme-img/cart.png)
+![Cart](https://github.com/Xenko10/e-commerce-frontend/blob/master/public/readme-img/cart.png)
 
 ### Footer
 
-![Footer](https://github.com/Xenko10/e-commerce/blob/master/public/readme-img/footer.png)
+![Footer](https://github.com/Xenko10/e-commerce-frontend/blob/master/public/readme-img/footer.png)
 
 ## How to run this project?
 
 1. Common setup. Clon the repository and install the dependencies.
 
-- git clone https://github.com/Xenko10/e-commerce.git
+- git clone https://github.com/Xenko10/e-commerce-frontend.git
 - cd e-commerce
 - npm install
 
