@@ -1,8 +1,8 @@
 import styles from "./ProductInCart.module.css";
 import axios from "axios";
 import { ChangeEvent, useState, useContext } from "react";
-import { ProductInCartDTO } from "../../../../types";
-import { API_URL } from "../../../../constant";
+import { ProductInCartDTO } from "../../../../types/types";
+import { API_URL } from "../../../../helpers/constant";
 import { ValuesContext } from "../../../components/NavbarChildrenWrapper/NavbarChildrenWrapper";
 
 export default function ProductInCart({

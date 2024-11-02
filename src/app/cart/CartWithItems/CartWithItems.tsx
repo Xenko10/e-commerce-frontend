@@ -1,6 +1,6 @@
 import styles from "./CartWithItems.module.css";
 import ProductInCart from "./ProductInCart/ProductInCart";
-import { ProductInCartDTO } from "../../../types";
+import { ProductInCartDTO } from "../../../types/types";
 
 type Products = {
   products: ProductInCartDTO[];

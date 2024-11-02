@@ -4,8 +4,8 @@ import styles from "./Cart.module.css";
 import EmptyCart from "./EmptyCart/EmptyCart";
 import CartWithItems from "./CartWithItems/CartWithItems";
 import { useState, useEffect } from "react";
-import { API_URL } from "../../constant";
-import { ProductInCartDTO, CartDTO } from "../../types";
+import { API_URL } from "../../helpers/constant";
+import { ProductInCartDTO, CartDTO } from "../../types/types";
 import axios from "axios";
 
 export default function Cart() {

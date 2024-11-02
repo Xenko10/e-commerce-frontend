@@ -3,8 +3,8 @@ import Cart from "./Actions/Cart";
 import Wishlist from "./Actions/Wishlist";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { API_URL } from "../../../constant";
-import { ProductWithActionsDTO } from "../../../types";
+import { API_URL } from "../../../helpers/constant";
+import { ProductWithActionsDTO } from "../../../types/types";
 
 export default function Product({
   id,

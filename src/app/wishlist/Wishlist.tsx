@@ -3,9 +3,9 @@
 import styles from "./Wishlist.module.css";
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { API_URL } from "../../constant";
+import { API_URL } from "../../helpers/constant";
 import Product from "../components/Product/Product";
-import { ProductWithActionsDTO, WishlistDTO, CartDTO } from "../../types";
+import { ProductWithActionsDTO, WishlistDTO, CartDTO } from "../../types/types";
 import EmptyWishlist from "./EmptyWishlist/EmptyWishlist";
 import { ValuesContext } from "../components/NavbarChildrenWrapper/NavbarChildrenWrapper";
 

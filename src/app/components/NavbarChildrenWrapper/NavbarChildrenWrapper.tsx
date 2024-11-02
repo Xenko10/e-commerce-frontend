@@ -9,8 +9,8 @@ import {
   Dispatch,
   SetStateAction,
 } from "react";
-import { API_URL } from "../../../constant";
-import { ProductDTO, CartDTO, WishlistDTO } from "../../../types";
+import { API_URL } from "../../../helpers/constant";
+import { ProductDTO, CartDTO, WishlistDTO } from "../../../types/types";
 import axios from "axios";
 
 type ContextData = {
