@@ -1,6 +1,6 @@
 import styles from "./Footer.module.css";
-import InfoLinks from "./InfoLinks/InfoLinks";
-import Copyright from "./Copyright/Copyright";
+import InfoLinks from "./components/InfoLinks/InfoLinks";
+import Copyright from "./components/Copyright/Copyright";
 
 const Footer = () => (
   <div className={styles.footer}>
