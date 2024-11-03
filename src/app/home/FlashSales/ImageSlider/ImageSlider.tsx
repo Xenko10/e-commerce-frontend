@@ -16,7 +16,7 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useMediaQuery } from "react-responsive";
 import { ValuesContext } from "../../../components/NavbarChildrenWrapper/NavbarChildrenWrapper";
 
-export default function ImageSlider() {
+const ImageSlider = () => {
   const [slides, setSlides] = useState(1);
 
   const isMediumScreen = useMediaQuery({ query: "(max-width: 1400px)" });
@@ -44,8 +44,8 @@ export default function ImageSlider() {
       naturalSlideWidth={270}
       naturalSlideHeight={340}
       totalSlides={products.length}
-      infinite={true}
-      isPlaying={true}
+      infinite
+      isPlaying
       visibleSlides={slides}
       dragEnabled={false}>
       <Slider>
@@ -79,4 +79,6 @@ export default function ImageSlider() {
       </div>
     </CarouselProvider>
   );
-}
+};
+
+export default ImageSlider;

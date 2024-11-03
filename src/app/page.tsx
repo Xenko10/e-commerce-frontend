@@ -1,5 +1,5 @@
 import Home from "./home/page";
 
-export default function App() {
-  return <Home />;
-}
+const App = () => <Home />;
+
+export default App;

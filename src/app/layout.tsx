@@ -12,21 +12,21 @@ export const metadata: Metadata = {
   description: "E-Commerce",
 };
 
-export default function RootLayout({
+const RootLayout = ({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {
-  return (
-    <html lang='en'>
-      <head>
-        <link rel='icon' href='/favicon.png' />
-      </head>
-      <body className={inter.className}>
-        <Header />
-        <NavbarChildrenWrapper children={children} />
-        <Footer />
-      </body>
-    </html>
-  );
-}
+}>) => (
+  <html lang='en'>
+    <head>
+      <link rel='icon' href='/favicon.png' />
+    </head>
+    <body className={inter.className}>
+      <Header />
+      <NavbarChildrenWrapper children={children} />
+      <Footer />
+    </body>
+  </html>
+);
+
+export default RootLayout;

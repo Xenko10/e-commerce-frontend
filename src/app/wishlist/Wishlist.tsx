@@ -9,7 +9,7 @@ import { ProductWithActionsDTO, WishlistDTO, CartDTO } from "../../types/types";
 import EmptyWishlist from "./EmptyWishlist/EmptyWishlist";
 import { ValuesContext } from "../components/NavbarChildrenWrapper/NavbarChildrenWrapper";
 
-export default function Wishlist() {
+const Wishlist = () => {
   const { cart, setCart, wishlist, setWishlist } = useContext(ValuesContext);
 
   const [products, setProducts] = useState<ProductWithActionsDTO[]>([]);
@@ -33,40 +33,44 @@ export default function Wishlist() {
     fetchData();
   }, []);
 
+  if (!isDataFetched) {
+    return null;
+  }
+
   return (
     <div className={styles.wishlist}>
       <div className={styles.contentWrapper}>
-        {isDataFetched ? (
-          isSomethingInWishlist ? (
-            <>
-              <h2 className={styles.header}>
-                Wishlist {wishlist.length !== 0 ? `(${wishlist.length})` : null}
-              </h2>
-              <div className={styles.productsWrapper}>
-                {products.map((product) => (
-                  <Product
-                    id={product.id}
-                    key={product.header}
-                    url={product.url}
-                    alt={product.alt}
-                    header={product.header}
-                    price={product.price}
-                    priceAfterDiscount={product.priceAfterDiscount}
-                    stars={product.stars}
-                    opinions={product.opinions}
-                    cart={cart}
-                    setCart={setCart}
-                    wishlist={wishlist}
-                    setWishlist={setWishlist}
-                  />
-                ))}
-              </div>
-            </>
-          ) : (
-            <EmptyWishlist />
-          )
-        ) : null}
+        {isSomethingInWishlist ? (
+          <>
+            <h2 className={styles.header}>
+              Wishlist {wishlist.length !== 0 ? `(${wishlist.length})` : null}
+            </h2>
+            <div className={styles.productsWrapper}>
+              {products.map((product) => (
+                <Product
+                  id={product.id}
+                  key={product.header}
+                  url={product.url}
+                  alt={product.alt}
+                  header={product.header}
+                  price={product.price}
+                  priceAfterDiscount={product.priceAfterDiscount}
+                  stars={product.stars}
+                  opinions={product.opinions}
+                  cart={cart}
+                  setCart={setCart}
+                  wishlist={wishlist}
+                  setWishlist={setWishlist}
+                />
+              ))}
+            </div>
+          </>
+        ) : (
+          <EmptyWishlist />
+        )}
       </div>
     </div>
   );
-}
+};
+
+export default Wishlist;

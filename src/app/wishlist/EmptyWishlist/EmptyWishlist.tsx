@@ -1,9 +1,7 @@
-import styles from "./EmptyWishlist.module.css";
+const EmptyWishlist = () => (
+  <div>
+    <h2>Wishlist is empty</h2>
+  </div>
+);
 
-export default function EmptyWishlist() {
-  return (
-    <div className={styles.emptyWishlist}>
-      <h2>Wishlist is empty</h2>
-    </div>
-  );
-}
+export default EmptyWishlist;

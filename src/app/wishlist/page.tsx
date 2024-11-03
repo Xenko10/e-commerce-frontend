@@ -1,5 +1,5 @@
 import Wishlist from "./Wishlist";
 
-export default function page() {
-  return <Wishlist />;
-}
+const page = () => <Wishlist />;
+
+export default page;
