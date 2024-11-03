@@ -6,7 +6,7 @@ import axios from "axios";
 import { API_URL } from "../../../helpers/constant";
 import { ProductWithActionsDTO } from "../../../types/types";
 
-export default function Product({
+const Product = ({
   id,
   url,
   alt,
@@ -19,7 +19,7 @@ export default function Product({
   setCart,
   wishlist,
   setWishlist,
-}: ProductWithActionsDTO) {
+}: ProductWithActionsDTO) => {
   const [isCartUpdating, setIsCartUpdating] = useState(false);
   const [isWishlistUpdating, setIsWishlistUpdating] = useState(false);
 
@@ -217,4 +217,6 @@ export default function Product({
       </div>
     </div>
   );
-}
+};
+
+export default Product;

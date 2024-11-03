@@ -5,7 +5,7 @@ import { ProductInCartDTO } from "../../../../types/types";
 import { API_URL } from "../../../../helpers/constant";
 import { ValuesContext } from "../../../components/NavbarChildrenWrapper/NavbarChildrenWrapper";
 
-export default function ProductInCart({
+const ProductInCart = ({
   id,
   url,
   alt,
@@ -16,7 +16,7 @@ export default function ProductInCart({
   quantity,
 }: ProductInCartDTO & {
   setProducts: React.Dispatch<React.SetStateAction<ProductInCartDTO[]>>;
-}) {
+}) => {
   const { setCart } = useContext(ValuesContext);
   const [isMouseOver, setIsMouseOver] = useState(false);
   const [isCartUpdating, setIsCartUpdating] = useState(false);
@@ -113,4 +113,6 @@ export default function ProductInCart({
       </div>
     </div>
   );
-}
+};
+
+export default ProductInCart;

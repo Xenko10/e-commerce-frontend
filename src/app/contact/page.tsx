@@ -1,5 +1,5 @@
 import Contact from "./Contact";
 
-export default function page() {
-  return <Contact />;
-}
+const page = () => <Contact />;
+
+export default page;

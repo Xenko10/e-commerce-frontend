@@ -8,7 +8,7 @@ import { API_URL } from "../../helpers/constant";
 import { ProductInCartDTO, CartDTO } from "../../types/types";
 import axios from "axios";
 
-export default function Cart() {
+const Cart = () => {
   const [products, setProducts] = useState<ProductInCartDTO[]>([]);
   const [isDataFetched, setIsDataFetched] = useState(false);
 
@@ -44,17 +44,21 @@ export default function Cart() {
     fetchData();
   }, []);
 
+  if (!isDataFetched) {
+    return null;
+  }
+
   return (
     <div>
       <div className={styles.contentWrapper}>
-        {isDataFetched ? (
-          isSomethingInCart && products.length !== 0 ? (
-            <CartWithItems products={products} setProducts={setProducts} />
-          ) : (
-            <EmptyCart />
-          )
-        ) : null}
+        {isSomethingInCart && products.length !== 0 ? (
+          <CartWithItems products={products} setProducts={setProducts} />
+        ) : (
+          <EmptyCart />
+        )}
       </div>
     </div>
   );
-}
+};
+
+export default Cart;

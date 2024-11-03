@@ -1,9 +1,9 @@
-import styles from "./EmptyCart.module.css";
-
-export default function EmptyCart() {
+const EmptyCart = () => {
   return (
-    <div className={styles.emptyCart}>
+    <div>
       <h2>Cart is empty</h2>
     </div>
   );
-}
+};
+
+export default EmptyCart;

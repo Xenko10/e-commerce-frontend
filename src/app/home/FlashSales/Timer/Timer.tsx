@@ -3,7 +3,7 @@
 import styles from "./Timer.module.css";
 import { useState, useEffect } from "react";
 
-export default function Timer() {
+const Timer = () => {
   const [time, setTime] = useState({
     days: "00",
     hours: "00",
@@ -67,4 +67,6 @@ export default function Timer() {
       </div>
     </div>
   );
-}
+};
+
+export default Timer;

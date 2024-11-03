@@ -6,12 +6,12 @@ type Products = {
   products: ProductInCartDTO[];
 };
 
-export default function CartWithItems({
+const CartWithItems = ({
   products,
   setProducts,
 }: Products & {
   setProducts: React.Dispatch<React.SetStateAction<ProductInCartDTO[]>>;
-}) {
+}) => {
   const subtotal = products.reduce(
     (sum, addend) =>
       sum +
@@ -65,4 +65,6 @@ export default function CartWithItems({
       </div>
     </div>
   );
-}
+};
+
+export default CartWithItems;
