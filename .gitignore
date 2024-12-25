@@ -34,5 +34,6 @@ yarn-error.log*
 next-env.d.ts
 
 # other
+.idea
 url.txt
 Aplikacje_Bazodanowe_JEE_zaliczenie_zadania.pdf
