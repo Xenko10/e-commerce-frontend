@@ -9,7 +9,7 @@ import {
   SetStateAction,
   ReactNode,
 } from "react";
-import { API_URL } from "../../../helpers/constant";
+import { API_URL, API_V2_URL } from "../../../helpers/constant";
 import { ProductDTO, CartDTO, WishlistDTO } from "../../../types/types";
 import axios from "axios";
 
@@ -31,10 +31,12 @@ export const NavbarChildrenWrapper = ({
   const [products, setProducts] = useState<ProductDTO[]>([]);
   useEffect(() => {
     const fetchData = async () => {
-      await axios.get<ProductDTO[]>(`${API_URL}/products`).then((response) => {
-        const data = response.data;
-        setProducts(data);
-      });
+      await axios
+        .get<ProductDTO[]>(`${API_V2_URL}/products`)
+        .then((response) => {
+          const data = response.data;
+          setProducts(data);
+        });
     };
     fetchData();
   }, []);
