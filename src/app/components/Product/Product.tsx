@@ -3,8 +3,8 @@ import Cart from "./Actions/Cart";
 import Wishlist from "./Actions/Wishlist";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { API_URL } from "../../../helpers/constant";
-import { ProductWithActionsDTO } from "../../../types/types";
+import { API_URL } from "@/helpers/constant";
+import { ProductWithActionsDTO } from "@/types/types";
 
 const Product = ({
   id,
@@ -105,7 +105,7 @@ const Product = ({
         {Array.from(Array(5), (_, index) => (
           <img
             key={index}
-            src={`/img/flashsales/${
+            src={`/img/stars/${
               index < filledStars
                 ? "star_filled.png"
                 : index === filledStars && halfFilledStar
@@ -153,7 +153,7 @@ const Product = ({
     if (!isWishlistUpdating && wishlist.some((item) => item.id === id)) {
       setIsAddedToWishlist(true);
     }
-  }, [cart, wishlist]);
+  }, [cart, id, isCartUpdating, isWishlistUpdating, wishlist]);
 
   return (
     <div className={styles.productWrapper}>
