@@ -14,7 +14,7 @@ import styles from "./ImageSlider.module.css";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useMediaQuery } from "react-responsive";
-import { ValuesContext } from "../../../components/NavbarChildrenWrapper/NavbarChildrenWrapper";
+import { ValuesContext } from "@/app/components/NavbarChildrenWrapper/NavbarChildrenWrapper";
 
 const ImageSlider = () => {
   const [slides, setSlides] = useState(1);

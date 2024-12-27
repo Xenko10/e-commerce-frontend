@@ -23,7 +23,7 @@ const RootLayout = ({
     </head>
     <body className={inter.className}>
       <Header />
-      <NavbarChildrenWrapper children={children} />
+      <NavbarChildrenWrapper >{children}</NavbarChildrenWrapper >
       <Footer />
     </body>
   </html>
