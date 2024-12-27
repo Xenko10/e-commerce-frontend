@@ -205,9 +205,9 @@ const Product = ({
           <h3>{header}</h3>
           <div className={styles.prices}>
             <span className={styles.priceAfterDiscount}>
-              ${priceAfterDiscount}
+              ${priceAfterDiscount ? priceAfterDiscount : price}
             </span>
-            <span className={styles.price}>${price}</span>
+            {priceAfterDiscount && <span className={styles.price}>${price}</span>}
           </div>
           <div className={styles.reviews}>
             <span>{renderStars()}</span>
