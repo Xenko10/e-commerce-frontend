@@ -155,6 +155,8 @@ const Product = ({
     }
   }, [cart, id, isCartUpdating, isWishlistUpdating, wishlist]);
 
+  const Stars = renderStars()
+
   return (
     <div className={styles.productWrapper}>
       <div
@@ -210,7 +212,7 @@ const Product = ({
             {priceAfterDiscount && <span className={styles.price}>${price}</span>}
           </div>
           <div className={styles.reviews}>
-            <span>{renderStars()}</span>
+            <span>{Stars}</span>
             <span className={styles.opinions}>({opinions})</span>
           </div>
         </div>
