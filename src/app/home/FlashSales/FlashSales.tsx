@@ -5,17 +5,18 @@ import ImageSlider from "./ImageSlider/ImageSlider";
 import { useQuery } from "@tanstack/react-query";
 import { ProductDTO } from "@/types/types";
 import { API_V2_URL } from "@/helpers/constant";
+import axios from "axios";
 
 const FlashSales = () => {
-  const { data, isFetching, isLoading } = useQuery<ProductDTO[]>({
+  const { data, isLoading } = useQuery<ProductDTO[]>({
     queryKey: ["flash-sales-products"],
     queryFn: async () => {
-      const response = await fetch(`${API_V2_URL}/flash-sales-products`);
-      return await response.json();
+      const response = await axios.get(`${API_V2_URL}/flash-sales-products`);
+      return response.data;
     },
   });
 
-  if (isLoading || isFetching || !data) {
+  if (isLoading || !data) {
     return null;
   }
 
