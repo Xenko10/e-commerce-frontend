@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useEffect, useState } from "react";
 import {
   CarouselProvider,
@@ -14,11 +12,12 @@ import styles from "./ImageSlider.module.css";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useMediaQuery } from "react-responsive";
-import { useQuery } from "@tanstack/react-query";
-import { API_V2_URL } from "@/helpers/constant";
 import { ProductDTO } from "@/types/types";
 
-const ImageSlider = () => {
+type Props = {
+  products: ProductDTO[];
+};
+const ImageSlider = ({ products }: Props) => {
   const [slides, setSlides] = useState(1);
 
   const isMediumScreen = useMediaQuery({ query: "(max-width: 1400px)" });
@@ -37,31 +36,19 @@ const ImageSlider = () => {
     }
   }, [isMediumScreen, isSmallScreen, isSmartphone]);
 
-  const { data, isFetching, isLoading } = useQuery<ProductDTO[]>({
-    queryKey: ["flash-sales-products"],
-    queryFn: async () => {
-      const response = await fetch(`${API_V2_URL}/flash-sales-products`);
-      return await response.json();
-    },
-  });
-
-  if (isLoading || isFetching || !data) {
-    return null;
-  }
-
   return (
     <CarouselProvider
       className={styles.sliderWrapper}
       naturalSlideWidth={270}
       naturalSlideHeight={340}
-      totalSlides={data.length}
+      totalSlides={products.length}
       infinite
       isPlaying
       visibleSlides={slides}
       dragEnabled={false}
     >
       <Slider>
-        {data.map((product) => (
+        {products.map((product) => (
           <Slide index={product.id} key={product.id} className={styles.slide}>
             <Product
               id={product.id}
