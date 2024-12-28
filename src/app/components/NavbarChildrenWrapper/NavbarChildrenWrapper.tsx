@@ -12,6 +12,7 @@ import {
 import { API_URL, API_V2_URL } from "@/helpers/constant";
 import { ProductDTO, CartDTO, WishlistDTO } from "@/types/types";
 import axios from "axios";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 type ContextData = {
   products: ProductDTO[];
@@ -22,6 +23,8 @@ type ContextData = {
 };
 
 export const ValuesContext = createContext<ContextData>(null!);
+
+const queryClient = new QueryClient();
 
 export const NavbarChildrenWrapper = ({
   children,
@@ -64,10 +67,13 @@ export const NavbarChildrenWrapper = ({
   }, []);
 
   return (
-    <ValuesContext.Provider
-      value={{ products, cart, wishlist, setCart, setWishlist }}>
-      <Navbar />
-      {children}
-    </ValuesContext.Provider>
+    <QueryClientProvider client={queryClient}>
+      <ValuesContext.Provider
+        value={{ products, cart, wishlist, setCart, setWishlist }}
+      >
+        <Navbar />
+        {children}
+      </ValuesContext.Provider>
+    </QueryClientProvider>
   );
 };

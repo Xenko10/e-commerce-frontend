@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import {
   CarouselProvider,
   Slider,
@@ -14,7 +14,9 @@ import styles from "./ImageSlider.module.css";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useMediaQuery } from "react-responsive";
-import { ValuesContext } from "@/app/components/NavbarChildrenWrapper/NavbarChildrenWrapper";
+import { useQuery } from "@tanstack/react-query";
+import { API_V2_URL } from "@/helpers/constant";
+import { ProductDTO } from "@/types/types";
 
 const ImageSlider = () => {
   const [slides, setSlides] = useState(1);
@@ -35,21 +37,31 @@ const ImageSlider = () => {
     }
   }, [isMediumScreen, isSmallScreen, isSmartphone]);
 
-  const { products, cart, wishlist, setCart, setWishlist } =
-    useContext(ValuesContext);
+  const { data, isFetching, isLoading } = useQuery<ProductDTO[]>({
+    queryKey: ["flash-sales-products"],
+    queryFn: async () => {
+      const response = await fetch(`${API_V2_URL}/flash-sales-products`);
+      return await response.json();
+    },
+  });
+
+  if (isLoading || isFetching || !data) {
+    return null;
+  }
 
   return (
     <CarouselProvider
       className={styles.sliderWrapper}
       naturalSlideWidth={270}
       naturalSlideHeight={340}
-      totalSlides={products.length}
+      totalSlides={data.length}
       infinite
       isPlaying
       visibleSlides={slides}
-      dragEnabled={false}>
+      dragEnabled={false}
+    >
       <Slider>
-        {products.map((product) => (
+        {data.map((product) => (
           <Slide index={product.id} key={product.id} className={styles.slide}>
             <Product
               id={product.id}
@@ -61,10 +73,10 @@ const ImageSlider = () => {
               priceAfterDiscount={product.priceAfterDiscount}
               stars={product.stars}
               opinions={product.opinions}
-              cart={cart}
-              setCart={setCart}
-              wishlist={wishlist}
-              setWishlist={setWishlist}
+              cart={[]}
+              setCart={() => {}}
+              wishlist={[]}
+              setWishlist={() => {}}
             />
           </Slide>
         ))}
