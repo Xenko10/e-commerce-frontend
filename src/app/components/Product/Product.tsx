@@ -119,7 +119,6 @@ const Product = ({
     );
   }
 
-  const [isMouseOver, setIsMouseOver] = useState(false);
   const [isAddedToWishlist, setIsAddedToWishlist] = useState(false);
   const [isAddedToCart, setIsAddedToCart] = useState(false);
 
@@ -161,12 +160,7 @@ const Product = ({
     <div className={styles.productWrapper}>
       <div
         className={styles.item}
-        onMouseOver={() => {
-          setIsMouseOver(true);
-        }}
-        onMouseLeave={() => {
-          setIsMouseOver(false);
-        }}>
+        >
         <div className={styles.imgActionsWrapper}>
           <img src={`/img/flashsales/${url}`} alt={alt} />
 
@@ -192,15 +186,6 @@ const Product = ({
               handleAddToCart();
             }}>
             <Cart cartStroke={cartStroke} />
-          </div>
-          <div
-            className={`${styles.addToCart} ${
-              isMouseOver ? styles.open : null
-            }`}
-            onClick={() => {
-              handleAddToCart();
-            }}>
-            {isAddedToCart ? "Remove from cart" : "Add to cart"}
           </div>
         </div>
         <div className={styles.info}>

@@ -60,31 +60,6 @@
   background-color: #db4444;
 }
 
-.addToCart {
-  position: absolute;
-  bottom: 0;
-
-  width: 100%;
-
-  display: flex;
-  justify-content: center;
-
-  background-color: black;
-  padding: 0.5rem 0;
-
-  color: white;
-  font-size: 0.875rem;
-  font-weight: 600;
-
-  cursor: pointer;
-
-  transition: opacity 0.3s ease-in-out;
-  opacity: 0;
-}
-
-.addToCart.open {
-  opacity: 1;
-}
 
 .info {
   display: flex;
