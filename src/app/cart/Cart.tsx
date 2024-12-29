@@ -3,56 +3,34 @@
 import styles from "./Cart.module.css";
 import EmptyCart from "./EmptyCart/EmptyCart";
 import CartWithItems from "./CartWithItems/CartWithItems";
-import { useState, useEffect } from "react";
-import { API_URL } from "@/helpers/constant";
-import { ProductInCartDTO, CartDTO } from "@/types/types";
-import axios from "axios";
+import { useContext } from "react";
+import { ValuesContext } from "@/app/components/AppLayout/AppLayout";
 
 const Cart = () => {
-  const [products, setProducts] = useState<ProductInCartDTO[]>([]);
-  const [isDataFetched, setIsDataFetched] = useState(false);
+  const context = useContext(ValuesContext);
+  const wishlist = context?.wishlist || [];
+  const cart = context?.cart || [];
 
-  const [isSomethingInCart, setIsSomethingInCart] = useState(false);
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await axios.get<CartDTO>(`${API_URL}/cart`);
-      const cartData = response.data;
-      if (cartData.length > 0) {
-        setIsSomethingInCart(true);
-        const productDataPromises = cartData.map((item) =>
-          axios.get(`${API_URL}/products/${item.id}`)
-        );
-        const productDataResponses = await Promise.all(productDataPromises);
-        const productData = productDataResponses.map((response, index) => {
-          const data = response.data;
-          const quantity =
-            cartData[index].id == data.id ? cartData[index].quantity : 1;
-          return {
-            id: data.id,
-            url: data.url,
-            alt: data.alt,
-            header: data.header,
-            price: data.price,
-            priceAfterDiscount: data.priceAfterDiscount,
-            quantity: quantity,
-          };
-        });
-        setProducts(productData);
-      }
-      setIsDataFetched(true);
+  const products = cart.map((product) => {
+    const isInWishlist = wishlist?.find((item) => {
+      return item.id === product.id;
+    });
+    const isInCart = cart?.find((item) => {
+      return item.id === product.id;
+    });
+    return {
+      ...product,
+      isInWishlist: !!isInWishlist,
+      isInCart: !!isInCart,
+      quantity: 1,
     };
-    fetchData();
-  }, []);
-
-  if (!isDataFetched) {
-    return null;
-  }
+  });
 
   return (
     <div>
       <div className={styles.contentWrapper}>
-        {isSomethingInCart && products.length !== 0 ? (
-          <CartWithItems products={products} setProducts={setProducts} />
+        {products.length !== 0 ? (
+          <CartWithItems products={products} />
         ) : (
           <EmptyCart />
         )}

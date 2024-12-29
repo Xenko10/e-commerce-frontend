@@ -8,11 +8,11 @@ import { ValuesContext } from "@/app/components/AppLayout/AppLayout";
 
 const Wishlist = () => {
   const context = useContext(ValuesContext);
-  const wishlistProducts = context?.wishlist || [];
+  const wishlist = context?.wishlist || [];
   const cart = context?.cart || [];
 
-  const products = wishlistProducts.map((product) => {
-    const isInWishlist = wishlistProducts?.find((item) => {
+  const products = wishlist.map((product) => {
+    const isInWishlist = wishlist?.find((item) => {
       return item.id === product.id;
     });
     const isInCart = cart?.find((item) => {
@@ -28,10 +28,8 @@ const Wishlist = () => {
   return (
     <div className={styles.wishlist}>
       <div className={styles.contentWrapper}>
-        {wishlistProducts.length > 0 && (
-          <h2 className={styles.header}>
-            Wishlist ({wishlistProducts.length})
-          </h2>
+        {wishlist.length > 0 && (
+          <h2 className={styles.header}>Wishlist ({wishlist.length})</h2>
         )}
         <div className={styles.productsWrapper}>
           {products.length !== 0 ? (

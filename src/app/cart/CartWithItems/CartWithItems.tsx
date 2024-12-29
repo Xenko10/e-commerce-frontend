@@ -1,23 +1,18 @@
 import styles from "./CartWithItems.module.css";
 import ProductInCart from "./ProductInCart/ProductInCart";
-import { ProductInCartDTO } from "../../../types/types";
+import { ProductInCartDTO } from "@/types/types";
 
-type Products = {
+type Props = {
   products: ProductInCartDTO[];
 };
 
-const CartWithItems = ({
-  products,
-  setProducts,
-}: Products & {
-  setProducts: React.Dispatch<React.SetStateAction<ProductInCartDTO[]>>;
-}) => {
+const CartWithItems = ({ products }: Props) => {
   const subtotal = products.reduce(
     (sum, addend) =>
       sum +
       addend.quantity *
         (addend.priceAfterDiscount ? addend.priceAfterDiscount : addend.price),
-    0
+    0,
   );
 
   const deliveryPrice = 10;
@@ -41,8 +36,9 @@ const CartWithItems = ({
           header={product.header}
           price={product.price}
           priceAfterDiscount={product.priceAfterDiscount}
-          setProducts={setProducts}
           quantity={product.quantity}
+          stars={product.stars}
+          opinions={product.opinions}
         />
       ))}
       <div className={styles.total}>
