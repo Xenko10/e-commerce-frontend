@@ -2,27 +2,10 @@
 
 import Navbar from "../Navbar/Navbar";
 import {
-  createContext,
-  useState,
-  useEffect,
-  Dispatch,
-  SetStateAction,
   ReactNode,
 } from "react";
-import { API_URL, API_V2_URL } from "@/helpers/constant";
-import { ProductDTO, CartDTO, WishlistDTO } from "@/types/types";
-import axios from "axios";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-type ContextData = {
-  products: ProductDTO[];
-  cart: CartDTO;
-  wishlist: WishlistDTO;
-  setCart: Dispatch<SetStateAction<CartDTO>>;
-  setWishlist: Dispatch<SetStateAction<WishlistDTO>>;
-};
-
-export const ValuesContext = createContext<ContextData>(null!);
 
 const queryClient = new QueryClient();
 
@@ -31,49 +14,10 @@ export const NavbarChildrenWrapper = ({
 }: Readonly<{
   children: ReactNode;
 }>) => {
-  const [products, setProducts] = useState<ProductDTO[]>([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      await axios
-        .get<ProductDTO[]>(`${API_V2_URL}/products`)
-        .then((response) => {
-          const data = response.data;
-          setProducts(data);
-        });
-    };
-    fetchData();
-  }, []);
-
-  const [cart, setCart] = useState<CartDTO>([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      await axios.get<CartDTO>(`${API_URL}/cart`).then((response) => {
-        const data = response.data;
-        setCart(data);
-      });
-    };
-    fetchData();
-  }, []);
-
-  const [wishlist, setWishlist] = useState<WishlistDTO>([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      await axios.get<WishlistDTO>(`${API_URL}/wishlist`).then((response) => {
-        const data = response.data;
-        setWishlist(data);
-      });
-    };
-    fetchData();
-  }, []);
-
   return (
     <QueryClientProvider client={queryClient}>
-      <ValuesContext.Provider
-        value={{ products, cart, wishlist, setCart, setWishlist }}
-      >
         <Navbar />
         {children}
-      </ValuesContext.Provider>
     </QueryClientProvider>
   );
 };

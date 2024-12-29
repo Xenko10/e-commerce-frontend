@@ -1,10 +1,26 @@
 import styles from "./Navbar.module.css";
-import { ValuesContext } from "../NavbarChildrenWrapper/NavbarChildrenWrapper";
-import { useContext } from "react";
 import Link from "next/link";
+import {useQuery} from "@tanstack/react-query";
+import {ProductDTO} from "@/types/types";
+import axios from "axios";
+import {API_URL} from "@/helpers/constant";
 
 const Navbar = () => {
-  const { cart, wishlist } = useContext(ValuesContext);
+  const { data: wishlist } = useQuery<ProductDTO[]>({
+    queryKey: ["wishlist"],
+    queryFn: async () => {
+      const response = await axios.get(`${API_URL}/wishlist`);
+      return response.data;
+    },
+  });
+
+  const { data: cart} = useQuery<ProductDTO[]>({
+    queryKey: ["cart"],
+    queryFn: async () => {
+      const response = await axios.get(`${API_URL}/cart`);
+      return response.data;
+    },
+  });
 
   return (
     <div className={styles.navbar}>
@@ -26,11 +42,11 @@ const Navbar = () => {
           </div>
           <Link href='/wishlist' className={styles.action}>
             <img src='./img/navbar/heart.png' alt='Wishlist' />
-            {wishlist.length !== 0 && <div>{wishlist.length}</div>}
+            {wishlist && wishlist.length !== 0 && <div>{wishlist.length}</div>}
           </Link>
           <Link href='/cart' className={styles.action}>
             <img src='./img/navbar/cart.png' alt='Cart' />
-            {cart.length !== 0 && <div>{cart.length}</div>}
+            {cart && cart.length !== 0 && <div>{cart.length}</div>}
           </Link>
         </div>
       </div>
