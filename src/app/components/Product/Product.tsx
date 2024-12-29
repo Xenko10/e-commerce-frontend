@@ -5,6 +5,7 @@ import { useContext } from "react";
 import axios from "axios";
 import { API_URL } from "@/helpers/constant";
 import { ValuesContext } from "@/app/components/AppLayout/AppLayout";
+import Stars from "./components/Stars";
 
 type Props = {
   id: number;
@@ -53,53 +54,26 @@ const Product = ({
     refetchCart();
   };
 
-  const renderStars = () => {
-    const filledStars = Math.floor(stars);
-    const halfFilledStar = stars - filledStars === 0.5;
-    return (
-      <>
-        {Array.from(Array(5), (_, index) => (
-          <img
-            key={index}
-            src={`/img/stars/${
-              index < filledStars
-                ? "star_filled.png"
-                : index === filledStars && halfFilledStar
-                  ? "star_half_filled.png"
-                  : "star_not_filled.png"
-            }`}
-            alt="star"
-          />
-        ))}
-      </>
-    );
-  };
-
   let wishlistStroke = isInWishlist ? "white" : "black";
   let cartStroke = isInCart ? "white" : "black";
-
-  const Stars = renderStars();
 
   return (
     <div className={styles.productWrapper}>
       <div className={styles.item}>
         <div className={styles.imgActionsWrapper}>
           <img src={`/img/flashsales/${url}`} alt={alt} />
-
-          {priceAfterDiscount ? (
+          {priceAfterDiscount && (
             <div className={styles.percentages}>
               -{Math.floor((1 - priceAfterDiscount / price) * 100)}%
             </div>
-          ) : null}
+          )}
           <div
             className={
               isInWishlist
                 ? `${styles.wishlist} ${styles.clicked}`
                 : styles.wishlist
             }
-            onClick={() => {
-              handleWishlistClick();
-            }}
+            onClick={handleWishlistClick}
           >
             <Wishlist wishlistStroke={wishlistStroke} />
           </div>
@@ -107,9 +81,7 @@ const Product = ({
             className={
               isInCart ? `${styles.cart} ${styles.clicked}` : styles.cart
             }
-            onClick={() => {
-              handleCartClick();
-            }}
+            onClick={handleCartClick}
           >
             <Cart cartStroke={cartStroke} />
           </div>
@@ -125,7 +97,7 @@ const Product = ({
             )}
           </div>
           <div className={styles.reviews}>
-            <span>{Stars}</span>
+            <Stars rating={stars} />
             <span className={styles.opinions}>({opinions})</span>
           </div>
         </div>
