@@ -6,6 +6,8 @@ import { useQuery } from "@tanstack/react-query";
 import { ProductDTO } from "@/types/types";
 import { API_URL } from "@/helpers/constant";
 import axios from "axios";
+import { useContext } from "react";
+import { ValuesContext } from "@/app/components/AppLayout/AppLayout";
 
 const FlashSales = () => {
   const { data, isLoading } = useQuery<ProductDTO[]>({
@@ -16,9 +18,22 @@ const FlashSales = () => {
     },
   });
 
+  const context = useContext(ValuesContext);
+  const wishlist = context?.wishlist || [];
+
   if (isLoading || !data) {
     return null;
   }
+
+  const products = data.map((product) => {
+    const isInWishlist = wishlist?.find((item) => {
+      return item.id === product.id;
+    });
+    return {
+      ...product,
+      isInWishlist: !!isInWishlist,
+    };
+  });
 
   return (
     <div className={styles.flashSales}>
@@ -30,7 +45,7 @@ const FlashSales = () => {
         <div className={styles.flashSalesTimerWrapper}>
           <h2>Flash Sales</h2>
         </div>
-        <ImageSlider products={data} />
+        <ImageSlider products={products} />
       </div>
     </div>
   );
