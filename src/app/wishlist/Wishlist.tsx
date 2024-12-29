@@ -1,73 +1,59 @@
 "use client";
 
 import styles from "./Wishlist.module.css";
-import { useState, useEffect, useContext } from "react";
-import axios from "axios";
-import { API_URL } from "../../helpers/constant";
+import { useContext } from "react";
 import Product from "../components/Product/Product";
-import { ProductWithActionsDTO, WishlistDTO, CartDTO } from "../../types/types";
 import EmptyWishlist from "./EmptyWishlist/EmptyWishlist";
-import { ValuesContext } from "../components/NavbarChildrenWrapper/NavbarChildrenWrapper";
+import { ValuesContext } from "@/app/components/AppLayout/AppLayout";
 
 const Wishlist = () => {
-  const { cart, setCart, wishlist, setWishlist } = useContext(ValuesContext);
+  const context = useContext(ValuesContext);
+  const wishlistProducts = context?.wishlist || [];
+  const cart = context?.cart || [];
 
-  const [products, setProducts] = useState<ProductWithActionsDTO[]>([]);
-  const [isDataFetched, setIsDataFetched] = useState(false);
-
-  const [isSomethingInWishlist, setIsSomethingInWishlist] = useState(false);
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await axios.get<WishlistDTO>(`${API_URL}/wishlist`);
-      const wishlistData = response.data;
-      setIsSomethingInWishlist(wishlistData.length !== 0);
-
-      const productDataPromises = wishlistData.map((item) =>
-        axios.get<ProductWithActionsDTO>(`${API_URL}/products/${item.id}`)
-      );
-      const productDataResponses = await Promise.all(productDataPromises);
-      const productData = productDataResponses.map((response) => response.data);
-      setProducts(productData);
-      setIsDataFetched(true);
+  const products = wishlistProducts.map((product) => {
+    const isInWishlist = wishlistProducts?.find((item) => {
+      return item.id === product.id;
+    });
+    const isInCart = cart?.find((item) => {
+      return item.id === product.id;
+    });
+    return {
+      ...product,
+      isInWishlist: !!isInWishlist,
+      isInCart: !!isInCart,
     };
-    fetchData();
-  }, []);
-
-  if (!isDataFetched) {
-    return null;
-  }
+  });
 
   return (
     <div className={styles.wishlist}>
       <div className={styles.contentWrapper}>
-        {isSomethingInWishlist ? (
-          <>
-            <h2 className={styles.header}>
-              Wishlist {wishlist.length !== 0 ? `(${wishlist.length})` : null}
-            </h2>
-            <div className={styles.productsWrapper}>
-              {products.map((product) => (
-                <Product
-                  id={product.id}
-                  key={product.header}
-                  url={product.url}
-                  alt={product.alt}
-                  header={product.header}
-                  price={product.price}
-                  priceAfterDiscount={product.priceAfterDiscount}
-                  stars={product.stars}
-                  opinions={product.opinions}
-                  cart={cart}
-                  setCart={setCart}
-                  wishlist={wishlist}
-                  setWishlist={setWishlist}
-                />
-              ))}
-            </div>
-          </>
-        ) : (
-          <EmptyWishlist />
+        {wishlistProducts.length > 0 && (
+          <h2 className={styles.header}>
+            Wishlist ({wishlistProducts.length})
+          </h2>
         )}
+        <div className={styles.productsWrapper}>
+          {products.length !== 0 ? (
+            products.map((product) => (
+              <Product
+                id={product.id}
+                key={product.header}
+                url={product.url}
+                alt={product.alt}
+                header={product.header}
+                price={product.price}
+                priceAfterDiscount={product.priceAfterDiscount}
+                stars={product.stars}
+                opinions={product.opinions}
+                isInWishlist={product.isInWishlist}
+                isInCart={product.isInCart}
+              />
+            ))
+          ) : (
+            <EmptyWishlist />
+          )}
+        </div>
       </div>
     </div>
   );

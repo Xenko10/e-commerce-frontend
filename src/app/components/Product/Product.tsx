@@ -52,6 +52,7 @@ const Product = ({
     }
     refetchCart();
   };
+
   const renderStars = () => {
     const filledStars = Math.floor(stars);
     const halfFilledStar = stars - filledStars === 0.5;
