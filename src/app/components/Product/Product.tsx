@@ -1,6 +1,6 @@
 import styles from "./Product.module.css";
-import Cart from "./Actions/Cart";
-import Wishlist from "./Actions/Wishlist";
+import Wishlist from "@/icons/Wishlist";
+import Cart from "@/icons/Cart";
 import { useContext } from "react";
 import axios from "axios";
 import { API_URL } from "@/helpers/constant";
