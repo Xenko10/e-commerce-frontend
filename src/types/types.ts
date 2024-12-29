@@ -11,6 +11,4 @@ export type ProductDTO = {
   opinions: number;
 };
 
-export type CartDTO = { id: number; quantity: number }[];
-
 export type ProductInCartDTO = ProductDTO & { quantity: number };
