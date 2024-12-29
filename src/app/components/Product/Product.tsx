@@ -1,7 +1,7 @@
 import styles from "./Product.module.css";
 import Cart from "./Actions/Cart";
 import Wishlist from "./Actions/Wishlist";
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import axios from "axios";
 import { API_URL } from "@/helpers/constant";
 import { ValuesContext } from "@/app/components/AppLayout/AppLayout";
@@ -16,6 +16,7 @@ type Props = {
   stars: number;
   opinions: number;
   isInWishlist: boolean;
+  isInCart: boolean;
 };
 
 const Product = ({
@@ -28,9 +29,11 @@ const Product = ({
   stars,
   opinions,
   isInWishlist,
+  isInCart,
 }: Props) => {
   const context = useContext(ValuesContext);
   const refetchWishlist = context?.refetchWishlist;
+  const refetchCart = context?.refetchCart;
 
   const handleWishlistClick = async () => {
     if (isInWishlist) {
@@ -40,7 +43,16 @@ const Product = ({
     }
     refetchWishlist();
   };
-  function renderStars() {
+
+  const handleCartClick = async () => {
+    if (isInCart) {
+      await axios.delete(`${API_URL}/cart/${id}`);
+    } else {
+      await axios.post(`${API_URL}/cart/${id}`);
+    }
+    refetchCart();
+  };
+  const renderStars = () => {
     const filledStars = Math.floor(stars);
     const halfFilledStar = stars - filledStars === 0.5;
     return (
@@ -60,12 +72,10 @@ const Product = ({
         ))}
       </>
     );
-  }
-
-  const [isAddedToCart, setIsAddedToCart] = useState(false);
+  };
 
   let wishlistStroke = isInWishlist ? "white" : "black";
-  let cartStroke = isAddedToCart ? "white" : "black";
+  let cartStroke = isInCart ? "white" : "black";
 
   const Stars = renderStars();
 
@@ -94,8 +104,11 @@ const Product = ({
           </div>
           <div
             className={
-              isAddedToCart ? `${styles.cart} ${styles.clicked}` : styles.cart
+              isInCart ? `${styles.cart} ${styles.clicked}` : styles.cart
             }
+            onClick={() => {
+              handleCartClick();
+            }}
           >
             <Cart cartStroke={cartStroke} />
           </div>

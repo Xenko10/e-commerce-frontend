@@ -15,7 +15,7 @@ import { useMediaQuery } from "react-responsive";
 import { ProductDTO } from "@/types/types";
 
 type Props = {
-  products: (ProductDTO & { isInWishlist: boolean })[];
+  products: (ProductDTO & { isInWishlist: boolean } & { isInCart: boolean })[];
 };
 
 const ImageSlider = ({ products }: Props) => {
@@ -62,6 +62,7 @@ const ImageSlider = ({ products }: Props) => {
               stars={product.stars}
               opinions={product.opinions}
               isInWishlist={product.isInWishlist}
+              isInCart={product.isInCart}
             />
           </Slide>
         ))}

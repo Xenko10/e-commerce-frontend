@@ -13,6 +13,7 @@ type ContextData = {
   wishlist: ProductDTO[];
   cart: ProductDTO[];
   refetchWishlist: () => void;
+  refetchCart: () => void;
 };
 
 export const ValuesContext = createContext<ContextData>(null!);
@@ -30,7 +31,7 @@ const AppLayout = ({ children }: Props) => {
 
   const wishlist = wishlistData || [];
 
-  const { data: cartData } = useQuery<ProductDTO[]>({
+  const { data: cartData, refetch: refetchCart } = useQuery<ProductDTO[]>({
     queryKey: ["cart"],
     queryFn: async () => {
       const response = await axios.get(`${API_URL}/cart`);
@@ -42,7 +43,9 @@ const AppLayout = ({ children }: Props) => {
 
   return (
     <>
-      <ValuesContext.Provider value={{ wishlist, cart, refetchWishlist }}>
+      <ValuesContext.Provider
+        value={{ wishlist, cart, refetchWishlist, refetchCart }}
+      >
         <Navbar />
         {children}
       </ValuesContext.Provider>

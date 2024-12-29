@@ -20,6 +20,7 @@ const FlashSales = () => {
 
   const context = useContext(ValuesContext);
   const wishlist = context?.wishlist || [];
+  const cart = context?.cart || [];
 
   if (isLoading || !data) {
     return null;
@@ -29,9 +30,13 @@ const FlashSales = () => {
     const isInWishlist = wishlist?.find((item) => {
       return item.id === product.id;
     });
+    const isInCart = cart?.find((item) => {
+      return item.id === product.id;
+    });
     return {
       ...product,
       isInWishlist: !!isInWishlist,
+      isInCart: !!isInCart,
     };
   });
 
