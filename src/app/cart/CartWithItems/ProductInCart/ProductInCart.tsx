@@ -1,8 +1,12 @@
 import styles from "./ProductInCart.module.css";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { ProductInCartDTO } from "@/types/types";
+import axios from "axios";
+import { API_URL } from "@/helpers/constant";
+import { ValuesContext } from "@/app/components/AppLayout/AppLayout";
 
 const ProductInCart = ({
+  id,
   url,
   alt,
   header,
@@ -10,7 +14,15 @@ const ProductInCart = ({
   priceAfterDiscount,
   quantity,
 }: ProductInCartDTO) => {
+  const context = useContext(ValuesContext);
+  const refetchCart = context?.refetchCart;
+
   const [isMouseOver, setIsMouseOver] = useState(false);
+
+  const deleteProductFromCart = async () => {
+    await axios.delete(`${API_URL}/cart/${id}`);
+    refetchCart();
+  };
 
   return (
     <div
@@ -28,6 +40,7 @@ const ProductInCart = ({
             className={`${styles.deleteFromCart} ${
               isMouseOver ? styles.show : null
             }`}
+            onClick={deleteProductFromCart}
           >
             X
           </div>
