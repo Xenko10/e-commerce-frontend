@@ -1,5 +1,5 @@
 import styles from "./ProductInCart.module.css";
-import { useContext, useState } from "react";
+import { ChangeEvent, useContext, useState } from "react";
 import { ProductInCartDTO } from "@/types/types";
 import axios from "axios";
 import { API_URL } from "@/helpers/constant";
@@ -18,10 +18,24 @@ const ProductInCart = ({
   const refetchCart = context?.refetchCart;
 
   const [isMouseOver, setIsMouseOver] = useState(false);
+  const [inputQuantity, setInputQuantity] = useState(quantity);
 
   const deleteProductFromCart = async () => {
     await axios.delete(`${API_URL}/cart/${id}`);
     refetchCart();
+  };
+
+  const updateProductQuantity = async (newQuantity: number) => {
+    await axios.put(`${API_URL}/cart/${id}/quantity/${newQuantity}`);
+    refetchCart();
+  };
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (parseInt(e.target.value) >= 0 && parseInt(e.target.value) <= 10) {
+      const newQuantity = parseInt(e.target.value, 10);
+      setInputQuantity(newQuantity);
+      updateProductQuantity(newQuantity);
+    }
   };
 
   return (
@@ -52,8 +66,11 @@ const ProductInCart = ({
       <div>
         <input
           type="number"
-          value={quantity.toString()}
+          value={inputQuantity.toString()}
           className={styles.quantityInput}
+          onChange={(e) => {
+            handleInputChange(e);
+          }}
         />
       </div>
       <div>

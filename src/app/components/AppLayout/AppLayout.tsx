@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { ProductDTO } from "@/types/types";
+import { ProductDTO, ProductInCartDTO } from "@/types/types";
 import axios from "axios";
 import { API_URL } from "@/helpers/constant";
 import Navbar from "@/app/components/Navbar/Navbar";
@@ -11,7 +11,7 @@ type Props = {
 
 type ContextData = {
   wishlist: ProductDTO[];
-  cart: ProductDTO[];
+  cart: ProductInCartDTO[];
   refetchWishlist: () => void;
   refetchCart: () => void;
 };
@@ -31,13 +31,15 @@ const AppLayout = ({ children }: Props) => {
 
   const wishlist = wishlistData || [];
 
-  const { data: cartData, refetch: refetchCart } = useQuery<ProductDTO[]>({
-    queryKey: ["cart"],
-    queryFn: async () => {
-      const response = await axios.get(`${API_URL}/cart`);
-      return response.data;
+  const { data: cartData, refetch: refetchCart } = useQuery<ProductInCartDTO[]>(
+    {
+      queryKey: ["cart"],
+      queryFn: async () => {
+        const response = await axios.get(`${API_URL}/cart`);
+        return response.data;
+      },
     },
-  });
+  );
 
   const cart = cartData || [];
 

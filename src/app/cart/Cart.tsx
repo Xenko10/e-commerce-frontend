@@ -22,7 +22,7 @@ const Cart = () => {
       ...product,
       isInWishlist: !!isInWishlist,
       isInCart: !!isInCart,
-      quantity: 1,
+      quantity: product.quantity,
     };
   });
 
