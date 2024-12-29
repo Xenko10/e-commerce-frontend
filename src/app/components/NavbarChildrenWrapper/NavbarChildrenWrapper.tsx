@@ -10,14 +10,12 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 const queryClient = new QueryClient();
 
 export const NavbarChildrenWrapper = ({
-  children,
-}: Readonly<{
+                                        children,
+                                      }: Readonly<{
   children: ReactNode;
-}>) => {
-  return (
+}>) => (
     <QueryClientProvider client={queryClient}>
-        <Navbar />
-        {children}
+      <Navbar/>
+      {children}
     </QueryClientProvider>
-  );
-};
+);
