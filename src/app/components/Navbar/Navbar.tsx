@@ -22,10 +22,6 @@ const Navbar = () => {
         </div>
         <button>☰</button>
         <div className={styles.actions}>
-          <div className={styles.search}>
-            <input type="text" placeholder="What are you looking for?" />
-            <img src="./img/navbar/search.png" alt="Search" />
-          </div>
           <Link href="/wishlist" className={styles.action}>
             <img src="./img/navbar/heart.png" alt="Wishlist" />
             {wishlist && wishlist.length !== 0 && <div>{wishlist.length}</div>}
