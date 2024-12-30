@@ -31,7 +31,7 @@ const ProductInCart = ({
   };
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (parseInt(e.target.value) >= 0 && parseInt(e.target.value) <= 10) {
+    if (parseInt(e.target.value) >= 1 && parseInt(e.target.value) <= 10) {
       const newQuantity = parseInt(e.target.value, 10);
       setInputQuantity(newQuantity);
       updateProductQuantity(newQuantity);
