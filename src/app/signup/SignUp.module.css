@@ -38,6 +38,12 @@
   color: rgba(0, 0, 0, 0.4);
 
   font-family: inherit;
+
+  font-size: 1rem;
+}
+
+.input:focus {
+  outline: none;
 }
 
 .createAccountBtn {
@@ -47,4 +53,6 @@
   padding: 1rem 0;
   color: white;
   background: #db4444;
+
+  font-size: 1rem;
 }
