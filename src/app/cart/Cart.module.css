@@ -1,6 +1,6 @@
 .contentWrapper {
   max-width: var(--max-width);
-  padding: 0rem var(--padding);
+  padding: 0 var(--padding);
   margin: 2rem auto;
 }
 
