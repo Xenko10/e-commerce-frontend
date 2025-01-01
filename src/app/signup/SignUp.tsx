@@ -18,18 +18,20 @@ const SignUp = () => {
     }));
   };
 
-  // TODO add css
-  // TODO add submit data button
+  // TODO make submit button do something
   // TODO add validation
 
   return (
     <div className={styles.contentWrapper}>
-      <div>
-        <h1>Create an account</h1>
-        <p>Enter you details bellow</p>
+      <div className={styles.textWrapper}>
+        <h1 className={styles.heading}>Create an account</h1>
+        <p className={styles.paragraph}>Enter you details bellow</p>
+      </div>
+      <div className={styles.formWrapper}>
         <input
           type="text"
           name="name"
+          className={styles.input}
           placeholder="Name"
           value={formData.name}
           onChange={handleChange}
@@ -37,6 +39,7 @@ const SignUp = () => {
         <input
           type="text"
           name="email"
+          className={styles.input}
           placeholder="Email"
           value={formData.email}
           onChange={handleChange}
@@ -44,11 +47,12 @@ const SignUp = () => {
         <input
           type="password"
           name="password"
+          className={styles.input}
           placeholder="Password"
           value={formData.password}
           onChange={handleChange}
         />
-        <button>Create account</button>
+        <button className={styles.createAccountBtn}>Create account</button>
       </div>
     </div>
   );
