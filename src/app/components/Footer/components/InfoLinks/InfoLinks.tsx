@@ -24,7 +24,6 @@ const InfoLinks = () => (
         <Link href="/login">Log in</Link>
         <Link href="/cart">Cart</Link>
         <Link href="/wishlist">Wishlist</Link>
-        <Link href="/">Shop</Link>
       </div>
     </div>
     <div className={styles.subsection}>
