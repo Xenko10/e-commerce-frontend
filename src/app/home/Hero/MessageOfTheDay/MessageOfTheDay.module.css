@@ -14,8 +14,6 @@
 @media (max-width: 950px) {
   .message {
     border: none;
-    padding-left: 0;
-
     max-width: var(--max-width);
     padding: 1rem var(--padding);
     margin: 0 auto;
