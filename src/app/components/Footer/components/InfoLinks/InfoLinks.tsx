@@ -8,19 +8,6 @@ const InfoLinks = () => (
         <Link href="/">Exclusive</Link>
       </h3>
       <div className={styles.infoWrapper}>
-        <div>Subscribe</div>
-        <div className={styles.subscribeToGetPromotionWrapper}>
-          <div>Get 10% off your first order</div>
-          <div className={styles.email}>
-            <input type="text" placeholder="Enter your email" />
-            <img src="./img/footer/send.png" alt="Send" />
-          </div>
-        </div>
-      </div>
-    </div>
-    <div className={styles.subsection}>
-      <h3 className={styles.itemHeader}>Support</h3>
-      <div className={styles.infoWrapper}>
         <div>
           Plac Tadeusza Kościuszki 45, <br />
           22-460 Szczebrzeszyn
@@ -43,10 +30,8 @@ const InfoLinks = () => (
     <div className={styles.subsection}>
       <h3 className={styles.itemHeader}>Quick Link</h3>
       <div className={styles.infoWrapper}>
-        <div>Privacy Policy</div>
-        <div>Terms Of Use</div>
-        <div>FAQ</div>
         <Link href="/contact">Contact</Link>
+        <Link href="/about">About</Link>
       </div>
     </div>
     <div className={styles.subsection}>
