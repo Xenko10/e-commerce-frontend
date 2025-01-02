@@ -2,4 +2,59 @@
   max-width: var(--max-width);
   padding: 0 var(--padding);
   margin: 2rem auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.textWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.heading {
+  margin: 0;
+}
+
+.paragraph {
+  margin: 0;
+}
+
+.formWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.input {
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  padding-bottom: 0.5rem;
+
+  color: rgba(0, 0, 0, 0.4);
+
+  font-family: inherit;
+
+  font-size: 1rem;
+
+  width: 20rem;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.logInBtn {
+  cursor: pointer;
+  border-radius: 0.25rem;
+  border: none;
+  padding: 1rem 0;
+  color: white;
+  background: #db4444;
+
+  font-size: 1rem;
 }
