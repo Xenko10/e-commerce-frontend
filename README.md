@@ -45,7 +45,7 @@ This project is a continuation of the e-commerce project (https://github.com/Xen
 
 2. Run the following.
 
-- start start.bat
+- npm run dev
 - open localhost:3000
 
 ## Figma Design credits
