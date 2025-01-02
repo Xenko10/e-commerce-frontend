@@ -5,7 +5,7 @@
 
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: 2rem;
 }
 
 .textWrapper {
@@ -25,7 +25,7 @@
 .formWrapper {
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
+  gap: 1.5rem;
 }
 
 .input {
@@ -40,6 +40,8 @@
   font-family: inherit;
 
   font-size: 1rem;
+
+  width: 20rem;
 }
 
 .input:focus {
@@ -55,4 +57,21 @@
   background: #db4444;
 
   font-size: 1rem;
+}
+
+.alreadyAccountWrapper {
+  text-align: center;
+
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.alreadyAccount {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.login {
+  color: rgba(0, 0, 0, 0.7);
+  font-weight: 500;
 }

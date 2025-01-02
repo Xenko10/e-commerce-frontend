@@ -54,6 +54,12 @@ const SignUp = () => {
         />
         <button className={styles.createAccountBtn}>Create account</button>
       </div>
+      <div className={styles.alreadyAccountWrapper}>
+        <span className={styles.alreadyAccount}>Already have an account?</span>{" "}
+        <a href="/login" className={styles.login}>
+          Log in
+        </a>
+      </div>
     </div>
   );
 };
