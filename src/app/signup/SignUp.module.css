@@ -23,6 +23,8 @@
 }
 
 .formWrapper {
+  position: relative;
+
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -33,9 +35,10 @@
   border-right: none;
   border-left: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.4);
-  padding-bottom: 0.5rem;
+  padding: 0.5rem;
 
   color: rgba(0, 0, 0, 0.4);
+  background: none;
 
   font-family: inherit;
 
@@ -57,6 +60,40 @@
   background: #db4444;
 
   font-size: 1rem;
+}
+
+.error {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  width: 100%;
+
+  background: white;
+  color: red;
+  border-radius: 0.25rem;
+  padding: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.7);
+}
+
+.success {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  width: 100%;
+
+  background: white;
+  color: green;
+  border-radius: 0.25rem;
+  padding: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.7);
 }
 
 .alreadyAccountWrapper {
