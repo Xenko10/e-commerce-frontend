@@ -2,12 +2,16 @@
 
 import styles from "./Login.module.css";
 import { ChangeEvent, useState } from "react";
+import axios from "axios";
+import { API_URL } from "@/helpers/constant";
 
 const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+  const [error, setError] = useState<string>("");
+  const [success, setSuccess] = useState<string>("");
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -17,14 +21,30 @@ const Login = () => {
     }));
   };
 
-  // TODO make submit button do something
-  // TODO add validation
+  const handleSubmit = async () => {
+    try {
+      await axios.post(`${API_URL}/account/login`, {
+        email: formData.email,
+        password: formData.password,
+      });
+      setError("");
+      setSuccess("Logged in successfully");
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 4000);
+    } catch (error) {
+      setError("Invalid email or password");
+      setTimeout(() => {
+        setError("");
+      }, 5000);
+    }
+  };
 
   return (
     <div className={styles.contentWrapper}>
       <div className={styles.textWrapper}>
         <h1 className={styles.heading}>Log in to Exclusive</h1>
-        <p className={styles.paragraph}>Enter you details bellow</p>
+        <p className={styles.paragraph}>Enter your details below</p>
       </div>
       <div className={styles.formWrapper}>
         <input
@@ -43,7 +63,16 @@ const Login = () => {
           value={formData.password}
           onChange={handleChange}
         />
-        <button className={styles.logInBtn}>Log in</button>
+        <button onClick={handleSubmit} className={styles.logInBtn}>
+          Log in
+        </button>
+        {error !== "" && (
+          <div
+            className={styles.error}
+            dangerouslySetInnerHTML={{ __html: error }}
+          />
+        )}
+        {success !== "" && <div className={styles.success}>{success}</div>}
       </div>
     </div>
   );
