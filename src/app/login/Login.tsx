@@ -4,8 +4,10 @@ import styles from "./Login.module.css";
 import { ChangeEvent, useState } from "react";
 import axios from "axios";
 import { API_URL } from "@/helpers/constant";
+import { useCookies } from "react-cookie";
 
 const Login = () => {
+  const [, setCookie] = useCookies(["Exclusive.UserId"]);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -23,20 +25,23 @@ const Login = () => {
 
   const handleSubmit = async () => {
     try {
-      await axios.post(`${API_URL}/account/login`, {
+      const response = await axios.post(`${API_URL}/account/login`, {
         email: formData.email,
         password: formData.password,
       });
+
+      // Keeping userId for authorization, I know it's not secure, will fix it later (maybe)
+      setCookie("Exclusive.UserId", response.data.userId);
       setError("");
       setSuccess("Logged in successfully");
       setTimeout(() => {
         window.location.href = "/";
-      }, 4000);
+      }, 2500);
     } catch (error) {
       setError("Invalid email or password");
       setTimeout(() => {
         setError("");
-      }, 5000);
+      }, 2500);
     }
   };
 
