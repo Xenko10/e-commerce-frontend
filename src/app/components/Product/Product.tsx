@@ -72,48 +72,44 @@ const Product = ({
   let cartStroke = isInCart ? "white" : "black";
 
   return (
-    <div className={styles.productWrapper}>
-      <div className={styles.item}>
-        <div className={styles.imgActionsWrapper}>
-          <img src={`/img/flashsales/${url}`} alt={alt} />
-          {priceAfterDiscount && (
-            <div className={styles.percentages}>
-              -{Math.floor((1 - priceAfterDiscount / price) * 100)}%
-            </div>
-          )}
-          <div
-            className={
-              isInWishlist
-                ? `${styles.wishlist} ${styles.clicked}`
-                : styles.wishlist
-            }
-            onClick={handleWishlistClick}
-          >
-            <Wishlist wishlistStroke={wishlistStroke} />
+    <div>
+      <div className={styles.imgActionsWrapper}>
+        <img src={`/img/flashsales/${url}`} alt={alt} />
+        {priceAfterDiscount && (
+          <div className={styles.percentages}>
+            -{Math.floor((1 - priceAfterDiscount / price) * 100)}%
           </div>
-          <div
-            className={
-              isInCart ? `${styles.cart} ${styles.clicked}` : styles.cart
-            }
-            onClick={handleCartClick}
-          >
-            <Cart cartStroke={cartStroke} />
-          </div>
+        )}
+        <div
+          className={
+            isInWishlist
+              ? `${styles.wishlist} ${styles.clicked}`
+              : styles.wishlist
+          }
+          onClick={handleWishlistClick}
+        >
+          <Wishlist wishlistStroke={wishlistStroke} />
         </div>
-        <div className={styles.info}>
-          <h3>{header}</h3>
-          <div className={styles.prices}>
-            <span className={styles.priceAfterDiscount}>
-              ${priceAfterDiscount ? priceAfterDiscount : price}
-            </span>
-            {priceAfterDiscount && (
-              <span className={styles.price}>${price}</span>
-            )}
-          </div>
-          <div className={styles.reviews}>
-            <Stars rating={stars} />
-            <span className={styles.opinions}>({opinions})</span>
-          </div>
+        <div
+          className={
+            isInCart ? `${styles.cart} ${styles.clicked}` : styles.cart
+          }
+          onClick={handleCartClick}
+        >
+          <Cart cartStroke={cartStroke} />
+        </div>
+      </div>
+      <div className={styles.info}>
+        <h3>{header}</h3>
+        <div className={styles.prices}>
+          <span className={styles.priceAfterDiscount}>
+            ${priceAfterDiscount ? priceAfterDiscount : price}
+          </span>
+          {priceAfterDiscount && <span className={styles.price}>${price}</span>}
+        </div>
+        <div className={styles.reviews}>
+          <Stars rating={stars} />
+          <span className={styles.opinions}>({opinions})</span>
         </div>
       </div>
     </div>
