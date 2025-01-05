@@ -25,7 +25,7 @@ const Navbar = () => {
         </div>
         <div className={styles.menu}>
           <Link href="/">Home</Link>
-          <Link href="/contact">Contact</Link>
+          <Link href="/products">Products</Link>
           <Link href="/about">About</Link>
           {isLoggedIn ? (
             <Link href="/profile">Profile</Link>
@@ -37,11 +37,15 @@ const Navbar = () => {
         <div className={styles.actions}>
           <Link href="/wishlist" className={styles.action}>
             <img src="./img/navbar/heart.png" alt="Wishlist" />
-            {wishlist && wishlist.length !== 0 && <div>{wishlist.length}</div>}
+            {wishlist && isLoggedIn && wishlist.length !== 0 && (
+              <div>{wishlist.length}</div>
+            )}
           </Link>
           <Link href="/cart" className={styles.action}>
             <img src="./img/navbar/cart.png" alt="Cart" />
-            {cart && cart.length !== 0 && <div>{cart.length}</div>}
+            {cart && isLoggedIn && cart.length !== 0 && (
+              <div>{cart.length}</div>
+            )}
           </Link>
         </div>
       </div>

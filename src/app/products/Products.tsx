@@ -6,10 +6,12 @@ import { ProductInCartDTO } from "@/types/types";
 import axios from "axios";
 import { API_URL } from "@/helpers/constant";
 import Product from "@/app/components/Product/Product";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ValuesContext } from "@/app/components/AppLayout/AppLayout";
+import { useCookies } from "react-cookie";
 
 const Products = () => {
+  // TODO add pagination
   const { data } = useQuery<ProductInCartDTO[]>({
     queryKey: ["products"],
     queryFn: async () => {
@@ -22,13 +24,20 @@ const Products = () => {
   const wishlist = context?.wishlist || [];
   const cart = context?.cart || [];
 
+  const [cookies] = useCookies(["Exclusive.UserId"]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    setIsLoggedIn(!!cookies["Exclusive.UserId"]);
+  }, [cookies]);
+
   // check if product is in wishlist
   const products = data?.map((product) => {
     const isInWishlist = wishlist?.find((item) => {
-      return item.id === product.id;
+      return isLoggedIn && item.id === product.id;
     });
     const isInCart = cart?.find((item) => {
-      return item.id === product.id;
+      return isLoggedIn && item.id === product.id;
     });
     return {
       ...product,
