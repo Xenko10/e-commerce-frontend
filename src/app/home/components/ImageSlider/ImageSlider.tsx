@@ -44,7 +44,6 @@ const ImageSlider = ({ products }: Props) => {
       naturalSlideHeight={340}
       totalSlides={products.length}
       infinite
-      isPlaying
       visibleSlides={slides}
       dragEnabled={false}
     >

@@ -1,7 +1,7 @@
 "use client";
 
-import styles from "./FlashSales.module.css";
-import ImageSlider from "@/app/home/components/ImageSlider/ImageSlider";
+import styles from "./Bestsellers.module.css";
+import ImageSlider from "../components/ImageSlider/ImageSlider";
 import { useQuery } from "@tanstack/react-query";
 import { ProductDTO } from "@/types/types";
 import { API_URL } from "@/helpers/constant";
@@ -9,7 +9,7 @@ import axios from "axios";
 import { useContext } from "react";
 import { ValuesContext } from "@/app/components/AppLayout/AppLayout";
 
-const FlashSales = () => {
+const Bestsellers = () => {
   const { data, isLoading } = useQuery<ProductDTO[]>({
     queryKey: ["flash-sales-products"],
     queryFn: async () => {
@@ -45,10 +45,10 @@ const FlashSales = () => {
       <div className={styles.contentWrapper}>
         <div className={styles.rectangleTodaysWrapper}>
           <div className={styles.rectangle}></div>
-          <div className={styles.todays}>Today&apos;s</div>
+          <div className={styles.our}>Our</div>
         </div>
         <div className={styles.flashSalesTimerWrapper}>
-          <h2>Flash Sales</h2>
+          <h2>Bestsellers</h2>
         </div>
         <ImageSlider products={products} />
       </div>
@@ -56,4 +56,4 @@ const FlashSales = () => {
   );
 };
 
-export default FlashSales;
+export default Bestsellers;
