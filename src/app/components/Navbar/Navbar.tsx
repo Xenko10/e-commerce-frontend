@@ -2,7 +2,7 @@
 
 import styles from "./Navbar.module.css";
 import Link from "next/link";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ValuesContext } from "@/app/components/AppLayout/AppLayout";
 import { useCookies } from "react-cookie";
 
@@ -11,6 +11,11 @@ const Navbar = () => {
   const wishlist = context?.wishlist || [];
   const cart = context?.cart || [];
   const [cookies] = useCookies(["Exclusive.UserId"]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    setIsLoggedIn(!!cookies["Exclusive.UserId"]);
+  }, [cookies]);
 
   return (
     <div className={styles.navbar}>
@@ -22,7 +27,7 @@ const Navbar = () => {
           <Link href="/">Home</Link>
           <Link href="/contact">Contact</Link>
           <Link href="/about">About</Link>
-          {cookies["Exclusive.UserId"] ? (
+          {isLoggedIn ? (
             <Link href="/profile">Profile</Link>
           ) : (
             <Link href="/login">Log in</Link>
