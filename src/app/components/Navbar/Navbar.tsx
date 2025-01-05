@@ -1,12 +1,16 @@
+"use client";
+
 import styles from "./Navbar.module.css";
 import Link from "next/link";
 import { useContext } from "react";
 import { ValuesContext } from "@/app/components/AppLayout/AppLayout";
+import { useCookies } from "react-cookie";
 
 const Navbar = () => {
   const context = useContext(ValuesContext);
   const wishlist = context?.wishlist || [];
   const cart = context?.cart || [];
+  const [cookies] = useCookies(["Exclusive.UserId"]);
 
   return (
     <div className={styles.navbar}>
@@ -18,7 +22,11 @@ const Navbar = () => {
           <Link href="/">Home</Link>
           <Link href="/contact">Contact</Link>
           <Link href="/about">About</Link>
-          <Link href="/login">Log in</Link>
+          {cookies["Exclusive.UserId"] ? (
+            <Link href="/profile">Profile</Link>
+          ) : (
+            <Link href="/login">Log in</Link>
+          )}
         </div>
         <button>☰</button>
         <div className={styles.actions}>

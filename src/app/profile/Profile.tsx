@@ -1,9 +1,9 @@
 import styles from "./Account.module.css";
 
-const Account = () => (
+const Profile = () => (
   <div className={styles.contentWrapper}>
-    <div>Account</div>
+    <div>Profile</div>
   </div>
 );
 
-export default Account;
+export default Profile;

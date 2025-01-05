@@ -81,6 +81,12 @@ const Login = () => {
         )}
         {success !== "" && <div className={styles.success}>{success}</div>}
       </div>
+      <div className={styles.noAccountWrapper}>
+        <span className={styles.noAccount}>Don&#39;t have an account?</span>
+        <a href="/signup" className={styles.signup}>
+          Sign up
+        </a>
+      </div>
     </div>
   );
 };

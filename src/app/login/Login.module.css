@@ -94,3 +94,20 @@
   padding: 1rem;
   border: 1px solid rgba(0, 0, 0, 0.7);
 }
+
+.noAccountWrapper {
+  text-align: center;
+
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.noAccount {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.signup {
+  color: rgba(0, 0, 0, 0.7);
+  font-weight: 500;
+}
