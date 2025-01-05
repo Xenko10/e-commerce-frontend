@@ -31,7 +31,9 @@ const Login = () => {
       });
 
       // Keeping userId for authorization, I know it's not secure, will fix it later (maybe)
-      setCookie("Exclusive.UserId", response.data.userId);
+      setCookie("Exclusive.UserId", response.data.userId, {
+        expires: new Date(Date.now() + 2 * 3600 * 1000),
+      });
       setError("");
       setSuccess("Logged in successfully");
       setTimeout(() => {
