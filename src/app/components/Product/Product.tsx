@@ -6,6 +6,7 @@ import axios from "axios";
 import { API_URL } from "@/helpers/constant";
 import { ValuesContext } from "@/app/components/AppLayout/AppLayout";
 import Stars from "./components/Stars";
+import { useCookies } from "react-cookie";
 
 type Props = {
   id: number;
@@ -35,8 +36,19 @@ const Product = ({
   const context = useContext(ValuesContext);
   const refetchWishlist = context?.refetchWishlist;
   const refetchCart = context?.refetchCart;
+  const [cookies] = useCookies(["Exclusive.UserId"]);
+
+  const shouldRedirect = () => {
+    if (!cookies["Exclusive.UserId"]) {
+      window.location.href = "/login";
+      return true;
+    }
+    return false;
+  };
 
   const handleWishlistClick = async () => {
+    if (shouldRedirect()) return;
+
     if (isInWishlist) {
       await axios.delete(`${API_URL}/wishlist/${id}`);
     } else {
@@ -46,6 +58,8 @@ const Product = ({
   };
 
   const handleCartClick = async () => {
+    if (shouldRedirect()) return;
+
     if (isInCart) {
       await axios.delete(`${API_URL}/cart/${id}`);
     } else {

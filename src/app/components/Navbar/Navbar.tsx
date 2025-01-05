@@ -18,7 +18,7 @@ const Navbar = () => {
           <Link href="/">Home</Link>
           <Link href="/contact">Contact</Link>
           <Link href="/about">About</Link>
-          <Link href="/signup">Sign Up</Link>
+          <Link href="/login">Log in</Link>
         </div>
         <button>☰</button>
         <div className={styles.actions}>
