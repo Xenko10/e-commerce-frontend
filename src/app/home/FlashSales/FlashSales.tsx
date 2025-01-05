@@ -13,7 +13,7 @@ const FlashSales = () => {
   const { data, isLoading } = useQuery<ProductDTO[]>({
     queryKey: ["flash-sales-products"],
     queryFn: async () => {
-      const response = await axios.get(`${API_URL}/flash-sales-products`);
+      const response = await axios.get(`${API_URL}/carousel/flash-sales`);
       return response.data;
     },
   });
@@ -41,15 +41,13 @@ const FlashSales = () => {
   });
 
   return (
-    <div className={styles.flashSales}>
+    <div>
       <div className={styles.contentWrapper}>
         <div className={styles.rectangleTodaysWrapper}>
-          <div className={styles.rectangle}></div>
+          <div className={styles.rectangle} />
           <div className={styles.todays}>Today&apos;s</div>
         </div>
-        <div className={styles.flashSalesTimerWrapper}>
-          <h2>Flash Sales</h2>
-        </div>
+        <h2>Flash Sales</h2>
         <ImageSlider products={products} />
       </div>
     </div>

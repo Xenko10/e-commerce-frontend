@@ -11,9 +11,9 @@ import { ValuesContext } from "@/app/components/AppLayout/AppLayout";
 
 const Bestsellers = () => {
   const { data, isLoading } = useQuery<ProductDTO[]>({
-    queryKey: ["flash-sales-products"],
+    queryKey: ["bestsellers-products"],
     queryFn: async () => {
-      const response = await axios.get(`${API_URL}/flash-sales-products`);
+      const response = await axios.get(`${API_URL}/carousel/bestsellers`);
       return response.data;
     },
   });
@@ -41,15 +41,13 @@ const Bestsellers = () => {
   });
 
   return (
-    <div className={styles.flashSales}>
+    <div>
       <div className={styles.contentWrapper}>
         <div className={styles.rectangleTodaysWrapper}>
-          <div className={styles.rectangle}></div>
+          <div className={styles.rectangle} />
           <div className={styles.our}>Our</div>
         </div>
-        <div className={styles.flashSalesTimerWrapper}>
-          <h2>Bestsellers</h2>
-        </div>
+        <h2>Bestsellers</h2>
         <ImageSlider products={products} />
       </div>
     </div>
