@@ -16,8 +16,6 @@ const Products = () => {
   const searchParams = useSearchParams();
   const page = searchParams.get("page") || 1;
 
-  console.log(page);
-
   const { data } = useQuery<ProductsListingDto>({
     queryKey: ["products", page],
     queryFn: async () => {
