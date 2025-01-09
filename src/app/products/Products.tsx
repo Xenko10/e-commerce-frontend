@@ -2,20 +2,28 @@
 
 import styles from "./Products.module.css";
 import { useQuery } from "@tanstack/react-query";
-import { ProductInCartDTO } from "@/types/types";
+import { ProductsListingDto } from "@/types/types";
 import axios from "axios";
 import { API_URL } from "@/helpers/constant";
 import Product from "@/app/components/Product/Product";
 import { useContext, useEffect, useState } from "react";
 import { ValuesContext } from "@/app/components/AppLayout/AppLayout";
 import { useCookies } from "react-cookie";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const Products = () => {
-  // TODO add pagination
-  const { data } = useQuery<ProductInCartDTO[]>({
-    queryKey: ["products"],
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const page = searchParams.get("page") || 1;
+
+  console.log(page);
+
+  const { data } = useQuery<ProductsListingDto>({
+    queryKey: ["products", page],
     queryFn: async () => {
-      const response = await axios.get(`${API_URL}/products`);
+      const response = await axios.get(`${API_URL}/products`, {
+        params: { page, pageSize: 4 },
+      });
       return response.data;
     },
   });
@@ -31,8 +39,14 @@ const Products = () => {
     setIsLoggedIn(!!cookies["Exclusive.UserId"]);
   }, [cookies]);
 
+  if (!data) {
+    return null;
+  }
+
+  const { items, totalCount } = data;
+
   // check if product is in wishlist
-  const products = data?.map((product) => {
+  const products = items?.map((product) => {
     const isInWishlist = wishlist?.find((item) => {
       return isLoggedIn && item.id === product.id;
     });
@@ -45,6 +59,10 @@ const Products = () => {
       isInCart: !!isInCart,
     };
   });
+
+  const handlePageChange = (newPage: number) => {
+    router.push(`/products?page=${newPage}`);
+  };
 
   return (
     <div>
@@ -66,6 +84,21 @@ const Products = () => {
               isInCart={product.isInCart}
             />
           ))}
+        </div>
+        <div className={styles.paginationWrapper}>
+          <button
+            onClick={() => handlePageChange(Number(page) - 1)}
+            disabled={Number(page) === 1}
+          >
+            {"<"}
+          </button>
+          <div>{page}</div>
+          <button
+            onClick={() => handlePageChange(Number(page) + 1)}
+            disabled={Number(page) === Math.ceil(totalCount / 4)}
+          >
+            {">"}
+          </button>
         </div>
       </div>
     </div>

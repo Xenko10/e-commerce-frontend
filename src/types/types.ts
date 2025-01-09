@@ -12,3 +12,8 @@ export type ProductDTO = {
 };
 
 export type ProductInCartDTO = ProductDTO & { quantity: number };
+
+export type ProductsListingDto = {
+  items: ProductDTO[];
+  totalCount: number;
+};
