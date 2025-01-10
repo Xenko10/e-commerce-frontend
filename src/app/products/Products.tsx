@@ -9,10 +9,10 @@ import Product from "@/app/components/Product/Product";
 import { useContext, useEffect, useState } from "react";
 import { ValuesContext } from "@/app/components/AppLayout/AppLayout";
 import { useCookies } from "react-cookie";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
+import Pagination from "./components/Pagination/Pagination";
 
 const Products = () => {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const page = searchParams.get("page") || 1;
 
@@ -58,10 +58,6 @@ const Products = () => {
     };
   });
 
-  const handlePageChange = (newPage: number) => {
-    router.push(`/products?page=${newPage}`);
-  };
-
   return (
     <div>
       <div className={styles.contentWrapper}>
@@ -83,21 +79,7 @@ const Products = () => {
             />
           ))}
         </div>
-        <div className={styles.paginationWrapper}>
-          <button
-            onClick={() => handlePageChange(Number(page) - 1)}
-            disabled={Number(page) === 1}
-          >
-            {"<"}
-          </button>
-          <div>{page}</div>
-          <button
-            onClick={() => handlePageChange(Number(page) + 1)}
-            disabled={Number(page) === Math.ceil(totalCount / 4)}
-          >
-            {">"}
-          </button>
-        </div>
+        <Pagination totalProductsCount={totalCount} page={Number(page)} />
       </div>
     </div>
   );
