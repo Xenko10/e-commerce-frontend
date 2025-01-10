@@ -9,14 +9,15 @@ import Product from "@/app/components/Product/Product";
 import { useContext, useEffect, useState } from "react";
 import { ValuesContext } from "@/app/components/AppLayout/AppLayout";
 import { useCookies } from "react-cookie";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Pagination from "./components/Pagination/Pagination";
 
 const Products = () => {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const page = searchParams.get("page") || 1;
 
-  const { data } = useQuery<ProductsListingDto>({
+  const { data, isLoading } = useQuery<ProductsListingDto>({
     queryKey: ["products", page],
     queryFn: async () => {
       const response = await axios.get(`${API_URL}/products`, {
@@ -37,8 +38,16 @@ const Products = () => {
     setIsLoggedIn(!!cookies["Exclusive.UserId"]);
   }, [cookies]);
 
+  if (Number(page) <= 0) {
+    router.push("/products");
+  }
+
+  if (!data && isLoading) {
+    return <div className={styles.contentWrapper}>Loading...</div>;
+  }
+
   if (!data) {
-    return null;
+    return <div className={styles.contentWrapper}>No products</div>;
   }
 
   const { items, totalCount } = data;

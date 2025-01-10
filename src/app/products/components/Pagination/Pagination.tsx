@@ -16,6 +16,10 @@ const Pagination = ({ totalProductsCount, page }: Props) => {
     router.push(`/products?page=${newPage}`);
   };
 
+  if (Number(page) > Math.ceil(totalProductsCount / 4)) {
+    router.push("/products");
+  }
+
   return (
     <div className={styles.pagination}>
       <button
