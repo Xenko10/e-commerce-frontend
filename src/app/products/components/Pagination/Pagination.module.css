@@ -5,3 +5,23 @@
   align-items: center;
   gap: 1rem;
 }
+
+.chevron {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+
+  border-radius: 50%;
+  border: none;
+}
+
+.chevron[disabled] {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.leftArrow {
+  transform: rotate(180deg);
+}

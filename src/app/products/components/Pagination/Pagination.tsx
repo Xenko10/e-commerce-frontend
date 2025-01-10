@@ -1,5 +1,6 @@
 import styles from "./Pagination.module.css";
 import { useRouter } from "next/navigation";
+import IconChevron from "../../../../../public/icons/IconChevron";
 
 type Props = {
   totalProductsCount: number;
@@ -23,17 +24,19 @@ const Pagination = ({ totalProductsCount, page }: Props) => {
   return (
     <div className={styles.pagination}>
       <button
+        className={`${styles.chevron} ${styles.leftArrow}`}
         onClick={() => handlePageChange(Number(page) - 1)}
         disabled={Number(page) === 1}
       >
-        {"<"}
+        <IconChevron />
       </button>
       <div>{page}</div>
       <button
+        className={styles.chevron}
         onClick={() => handlePageChange(Number(page) + 1)}
         disabled={Number(page) === Math.ceil(totalProductsCount / 4)}
       >
-        {">"}
+        <IconChevron />
       </button>
     </div>
   );
