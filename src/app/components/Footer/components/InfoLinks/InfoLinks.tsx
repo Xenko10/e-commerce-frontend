@@ -19,7 +19,7 @@ const InfoLinks = () => (
     <div className={styles.subsection}>
       <h3 className={styles.itemHeader}>Account</h3>
       <div className={styles.infoWrapper}>
-        <Link href="/account">My Account</Link>
+        <Link href="/profile">My Account</Link>
         <Link href="/signup">Sign up</Link>
         <Link href="/login">Log in</Link>
         <Link href="/cart">Cart</Link>

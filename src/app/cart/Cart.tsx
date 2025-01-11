@@ -3,13 +3,31 @@
 import styles from "./Cart.module.css";
 import EmptyCart from "./EmptyCart/EmptyCart";
 import CartWithItems from "./CartWithItems/CartWithItems";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
 import { ValuesContext } from "@/app/components/AppLayout/AppLayout";
+import Link from "next/link";
 
 const Cart = () => {
   const context = useContext(ValuesContext);
   const wishlist = context?.wishlist || [];
   const cart = context?.cart || [];
+
+  const [cookies] = useCookies(["Exclusive.UserId"]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    setIsLoggedIn(!!cookies["Exclusive.UserId"]);
+  }, [cookies]);
+
+  if (!isLoggedIn) {
+    return (
+      <div className={styles.contentWrapper}>
+        Please&nbsp;
+        <Link href="/">log in</Link>&nbsp;to see your cart
+      </div>
+    );
+  }
 
   const products = cart.map((product) => {
     const isInWishlist = wishlist?.find((item) => {

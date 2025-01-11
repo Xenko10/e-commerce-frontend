@@ -1,15 +1,33 @@
 "use client";
 
 import styles from "./Wishlist.module.css";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import Product from "../components/Product/Product";
 import EmptyWishlist from "./EmptyWishlist/EmptyWishlist";
+import { useCookies } from "react-cookie";
 import { ValuesContext } from "@/app/components/AppLayout/AppLayout";
+import Link from "next/link";
 
 const Wishlist = () => {
   const context = useContext(ValuesContext);
   const wishlist = context?.wishlist || [];
   const cart = context?.cart || [];
+
+  const [cookies] = useCookies(["Exclusive.UserId"]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    setIsLoggedIn(!!cookies["Exclusive.UserId"]);
+  }, [cookies]);
+
+  if (!isLoggedIn) {
+    return (
+      <div className={styles.contentWrapper}>
+        Please&nbsp;
+        <Link href="/">log in</Link>&nbsp;to see your wishlist
+      </div>
+    );
+  }
 
   const products = wishlist.map((product) => {
     const isInWishlist = wishlist?.find((item) => {
