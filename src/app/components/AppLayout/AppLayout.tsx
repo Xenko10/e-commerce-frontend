@@ -4,7 +4,7 @@ import axios from "axios";
 import { API_URL } from "@/helpers/constant";
 import Navbar from "@/app/components/Navbar/Navbar";
 import { createContext, ReactNode } from "react";
-import { useCookies } from "react-cookie";
+import useUserAuthorization from "@/hooks/useUserAuthorization";
 
 type Props = {
   children: ReactNode;
@@ -20,7 +20,7 @@ type ContextData = {
 export const ValuesContext = createContext<ContextData>(null!);
 
 const AppLayout = ({ children }: Props) => {
-  const [cookies] = useCookies(["Exclusive.Token"]);
+  const userAuthorization = useUserAuthorization();
   const { data: wishlistData, refetch: refetchWishlist } = useQuery<
     ProductDTO[]
   >({
@@ -28,7 +28,7 @@ const AppLayout = ({ children }: Props) => {
     queryFn: async () => {
       const response = await axios.get(`${API_URL}/wishlist`, {
         headers: {
-          Authorization: `Bearer ${cookies["Exclusive.Token"]}`,
+          Authorization: userAuthorization,
         },
       });
       return response.data;
@@ -43,7 +43,7 @@ const AppLayout = ({ children }: Props) => {
       queryFn: async () => {
         const response = await axios.get(`${API_URL}/cart`, {
           headers: {
-            Authorization: `Bearer ${cookies["Exclusive.Token"]}`,
+            Authorization: userAuthorization,
           },
         });
         return response.data;
