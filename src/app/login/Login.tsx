@@ -5,6 +5,8 @@ import { ChangeEvent, useState } from "react";
 import axios from "axios";
 import { API_URL } from "@/helpers/constant";
 import { useCookies } from "react-cookie";
+import { jwtDecode } from "jwt-decode";
+import { LoginResponse } from "./types/types";
 
 const Login = () => {
   const [, setCookie] = useCookies(["Exclusive.Token"]);
@@ -25,13 +27,21 @@ const Login = () => {
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.post(`${API_URL}/account/login`, {
-        email: formData.email,
-        password: formData.password,
-      });
+      const response = await axios.post<LoginResponse>(
+        `${API_URL}/account/login`,
+        {
+          email: formData.email,
+          password: formData.password,
+        },
+      );
 
-      setCookie("Exclusive.Token", response.data.token, {
-        expires: new Date(Date.now() + 2 * 3600 * 1000),
+      const token = response.data.token;
+      const decodedToken = jwtDecode(token) as { exp: number };
+
+      const expires = new Date(decodedToken.exp * 1000);
+
+      setCookie("Exclusive.Token", token, {
+        expires,
       });
       setError("");
       setSuccess("Logged in successfully");
