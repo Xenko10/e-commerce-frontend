@@ -13,11 +13,11 @@ const Wishlist = () => {
   const wishlist = context?.wishlist || [];
   const cart = context?.cart || [];
 
-  const [cookies] = useCookies(["Exclusive.UserId"]);
+  const [cookies] = useCookies(["Exclusive.Token"]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    setIsLoggedIn(!!cookies["Exclusive.UserId"]);
+    setIsLoggedIn(!!cookies["Exclusive.Token"]);
   }, [cookies]);
 
   if (!isLoggedIn) {

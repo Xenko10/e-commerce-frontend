@@ -7,7 +7,7 @@ import { API_URL } from "@/helpers/constant";
 import { useCookies } from "react-cookie";
 
 const Login = () => {
-  const [, setCookie] = useCookies(["Exclusive.UserId"]);
+  const [, setCookie] = useCookies(["Exclusive.Token"]);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -31,7 +31,7 @@ const Login = () => {
       });
 
       // Keeping userId for authorization, I know it's not secure, will fix it later (maybe)
-      setCookie("Exclusive.UserId", response.data.userId, {
+      setCookie("Exclusive.Token", response.data.token, {
         expires: new Date(Date.now() + 2 * 3600 * 1000),
       });
       setError("");

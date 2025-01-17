@@ -36,10 +36,10 @@ const Product = ({
   const context = useContext(ValuesContext);
   const refetchWishlist = context?.refetchWishlist;
   const refetchCart = context?.refetchCart;
-  const [cookies] = useCookies(["Exclusive.UserId"]);
+  const [cookies] = useCookies(["Exclusive.Token"]);
 
   const shouldRedirect = () => {
-    if (!cookies["Exclusive.UserId"]) {
+    if (!cookies["Exclusive.Token"]) {
       window.location.href = "/login";
       return true;
     }
