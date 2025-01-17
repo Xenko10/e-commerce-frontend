@@ -24,7 +24,7 @@ const Wishlist = () => {
     return (
       <div className={styles.contentWrapper}>
         Please&nbsp;
-        <Link href="/">log in</Link>&nbsp;to see your wishlist
+        <Link href="/login">log in</Link>&nbsp;to see your wishlist
       </div>
     );
   }

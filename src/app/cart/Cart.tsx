@@ -24,7 +24,7 @@ const Cart = () => {
     return (
       <div className={styles.contentWrapper}>
         Please&nbsp;
-        <Link href="/">log in</Link>&nbsp;to see your cart
+        <Link href="/login">log in</Link>&nbsp;to see your cart
       </div>
     );
   }
