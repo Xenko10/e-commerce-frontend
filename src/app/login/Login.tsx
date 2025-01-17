@@ -30,7 +30,6 @@ const Login = () => {
         password: formData.password,
       });
 
-      // Keeping userId for authorization, I know it's not secure, will fix it later (maybe)
       setCookie("Exclusive.Token", response.data.token, {
         expires: new Date(Date.now() + 2 * 3600 * 1000),
       });
