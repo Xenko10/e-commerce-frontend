@@ -7,6 +7,7 @@ import { API_URL } from "@/helpers/constant";
 import { ValuesContext } from "@/app/components/AppLayout/AppLayout";
 import Stars from "./components/Stars";
 import { useCookies } from "react-cookie";
+import useUserAuthorization from "@/hooks/useUserAuthorization";
 
 type Props = {
   id: number;
@@ -33,6 +34,7 @@ const Product = ({
   isInWishlist,
   isInCart,
 }: Props) => {
+  const userAuthorization = useUserAuthorization();
   const context = useContext(ValuesContext);
   const refetchWishlist = context?.refetchWishlist;
   const refetchCart = context?.refetchCart;
@@ -50,9 +52,21 @@ const Product = ({
     if (shouldRedirect()) return;
 
     if (isInWishlist) {
-      await axios.delete(`${API_URL}/wishlist/${id}`);
+      await axios.delete(`${API_URL}/wishlist/${id}`, {
+        headers: {
+          Authorization: userAuthorization,
+        },
+      });
     } else {
-      await axios.post(`${API_URL}/wishlist/${id}`);
+      await axios.post(
+        `${API_URL}/wishlist/${id}`,
+        {},
+        {
+          headers: {
+            Authorization: userAuthorization,
+          },
+        },
+      );
     }
     refetchWishlist();
   };
@@ -61,9 +75,21 @@ const Product = ({
     if (shouldRedirect()) return;
 
     if (isInCart) {
-      await axios.delete(`${API_URL}/cart/${id}`);
+      await axios.delete(`${API_URL}/cart/${id}`, {
+        headers: {
+          Authorization: userAuthorization,
+        },
+      });
     } else {
-      await axios.post(`${API_URL}/cart/${id}`);
+      await axios.post(
+        `${API_URL}/cart/${id}`,
+        {},
+        {
+          headers: {
+            Authorization: userAuthorization,
+          },
+        },
+      );
     }
     refetchCart();
   };
