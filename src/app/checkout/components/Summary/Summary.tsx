@@ -1,24 +1,20 @@
-"use client";
-
 import styles from "./Summary.module.css";
 import { useContext } from "react";
 import { ValuesContext } from "@/app/components/AppLayout/AppLayout";
 import SummaryItem from "./SummaryItem/SummaryItem";
 import useCartStatus from "@/hooks/useCartStatus";
-import { useRouter } from "next/navigation";
 
-const Summary = () => {
-  const router = useRouter();
+type Props = {
+  handleSubmit: () => void;
+};
+
+const Summary = ({ handleSubmit }: Props) => {
   const context = useContext(ValuesContext);
   const cart = context?.cart || [];
 
   const { shipping, total, subtotal, deliveryPrice } = useCartStatus({
     products: cart,
   });
-
-  const handlePlaceOrder = () => {
-    router.push("/order-placed");
-  };
 
   return (
     <div>
@@ -46,10 +42,7 @@ const Summary = () => {
           <span>Total:</span>
           <span>${total}</span>
         </div>
-        <button
-          onClick={() => handlePlaceOrder()}
-          className={styles.placeOrder}
-        >
+        <button onClick={() => handleSubmit()} className={styles.placeOrder}>
           Place order
         </button>
       </div>
