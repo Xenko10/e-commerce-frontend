@@ -2,20 +2,16 @@
 
 import styles from "./Navbar.module.css";
 import Link from "next/link";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { ValuesContext } from "@/app/components/AppLayout/AppLayout";
-import { useCookies } from "react-cookie";
+import useUserStatus from "@/hooks/useUserStatus";
 
 const Navbar = () => {
   const context = useContext(ValuesContext);
   const wishlist = context?.wishlist || [];
   const cart = context?.cart || [];
-  const [cookies] = useCookies(["Exclusive.Token"]);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  useEffect(() => {
-    setIsLoggedIn(!!cookies["Exclusive.Token"]);
-  }, [cookies]);
+  const { isLoggedIn } = useUserStatus();
 
   return (
     <div className={styles.navbar}>
