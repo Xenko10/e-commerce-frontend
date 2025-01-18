@@ -17,6 +17,8 @@ const BillingInput = ({ label, value, setValue }: Props) => (
       value={value}
       onChange={(e) => setValue(e.target.value)}
       className={styles.input}
+      required
+      minLength={3}
     />
   </div>
 );

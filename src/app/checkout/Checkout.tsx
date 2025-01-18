@@ -4,7 +4,7 @@ import styles from "./Checkout.module.css";
 
 import BillingDetails from "./components/BillingDetails/BillingDetails";
 import Summary from "./components/Summary/Summary";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 
 const Checkout = () => {
@@ -16,8 +16,10 @@ const Checkout = () => {
     phoneNumber: "",
     email: "",
   });
+  const [error, setError] = useState("");
 
-  const handleSubmit = () => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     if (
       form.name.length < 3 ||
       form.streetAddress.length < 3 ||
@@ -25,6 +27,10 @@ const Checkout = () => {
       form.phoneNumber.length < 3 ||
       form.email.length < 3
     ) {
+      setError("Fill in all fields");
+      setTimeout(() => {
+        setError("");
+      }, 4000);
       return;
     }
     router.push("/order-placed");
@@ -32,10 +38,10 @@ const Checkout = () => {
 
   return (
     <div>
-      <div className={styles.contentWrapper}>
-        <BillingDetails form={form} setForm={setForm} />
-        <Summary handleSubmit={handleSubmit} />
-      </div>
+      <form className={styles.contentWrapper} onSubmit={handleSubmit}>
+        <BillingDetails form={form} setForm={setForm} errorMessage={error} />
+        <Summary />
+      </form>
     </div>
   );
 };

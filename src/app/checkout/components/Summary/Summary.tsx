@@ -1,14 +1,10 @@
 import styles from "./Summary.module.css";
-import { useContext } from "react";
+import { FormEvent, useContext } from "react";
 import { ValuesContext } from "@/app/components/AppLayout/AppLayout";
 import SummaryItem from "./SummaryItem/SummaryItem";
 import useCartStatus from "@/hooks/useCartStatus";
 
-type Props = {
-  handleSubmit: () => void;
-};
-
-const Summary = ({ handleSubmit }: Props) => {
+const Summary = () => {
   const context = useContext(ValuesContext);
   const cart = context?.cart || [];
 
@@ -42,7 +38,7 @@ const Summary = ({ handleSubmit }: Props) => {
           <span>Total:</span>
           <span>${total}</span>
         </div>
-        <button onClick={() => handleSubmit()} className={styles.placeOrder}>
+        <button type="submit" className={styles.placeOrder}>
           Place order
         </button>
       </div>

@@ -7,9 +7,10 @@ import { FormData } from "../../types/types";
 type Props = {
   form: FormData;
   setForm: (form: FormData) => void;
+  errorMessage: string;
 };
 
-const BillingDetails = ({ form, setForm }: Props) => (
+const BillingDetails = ({ form, setForm, errorMessage }: Props) => (
   <div className={styles.billingDetails}>
     <h1 className={styles.header}>Billing Details</h1>
     <div className={styles.formWrapper}>
@@ -39,6 +40,7 @@ const BillingDetails = ({ form, setForm }: Props) => (
         setValue={(value) => setForm({ ...form, email: value })}
       />
     </div>
+    <p className={styles.errorMessage}>{errorMessage}</p>
   </div>
 );
 
