@@ -1,5 +1,6 @@
 "use client";
 
+import styles from "./Summary.module.css";
 import { useContext } from "react";
 import { ValuesContext } from "@/app/components/AppLayout/AppLayout";
 import SummaryItem from "./SummaryItem/SummaryItem";
@@ -7,9 +8,9 @@ import SummaryItem from "./SummaryItem/SummaryItem";
 const Summary = () => {
   const context = useContext(ValuesContext);
   const cart = context?.cart || [];
-  console.log(cart);
+
   return (
-    <div>
+    <div className={styles.summary}>
       {cart.map((item) => (
         <SummaryItem
           key={item.id}
