@@ -47,7 +47,7 @@ const Login = () => {
       setSuccess("Logged in successfully");
       setTimeout(() => {
         window.location.href = "/";
-      }, 2500);
+      }, 500);
     } catch (error) {
       setError("Invalid email or password");
       setTimeout(() => {
