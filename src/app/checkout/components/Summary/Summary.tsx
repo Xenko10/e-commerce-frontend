@@ -14,6 +14,10 @@ const Summary = () => {
     products: cart,
   });
 
+  const handlePlaceOrder = () => {
+    alert("Order placed!");
+  };
+
   return (
     <div>
       <div className={styles.summary}>
@@ -40,6 +44,12 @@ const Summary = () => {
           <span>Total:</span>
           <span>${total}</span>
         </div>
+        <button
+          onClick={() => handlePlaceOrder()}
+          className={styles.placeOrder}
+        >
+          Place order
+        </button>
       </div>
     </div>
   );
