@@ -24,7 +24,7 @@ const AppLayout = ({ children }: Props) => {
   const { data: wishlistData, refetch: refetchWishlist } = useQuery<
     ProductDTO[]
   >({
-    queryKey: ["wishlist"],
+    queryKey: ["wishlist", userAuthorization],
     queryFn: async () => {
       const response = await axios.get(`${API_URL}/wishlist`, {
         headers: {
@@ -39,7 +39,7 @@ const AppLayout = ({ children }: Props) => {
 
   const { data: cartData, refetch: refetchCart } = useQuery<ProductInCartDTO[]>(
     {
-      queryKey: ["cart"],
+      queryKey: ["cart", userAuthorization],
       queryFn: async () => {
         const response = await axios.get(`${API_URL}/cart`, {
           headers: {
