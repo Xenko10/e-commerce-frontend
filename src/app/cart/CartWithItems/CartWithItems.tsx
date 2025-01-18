@@ -1,6 +1,7 @@
 import styles from "./CartWithItems.module.css";
 import ProductInCart from "./ProductInCart/ProductInCart";
 import { ProductInCartDTO } from "@/types/types";
+import Link from "next/link";
 
 type Props = {
   products: ProductInCartDTO[];
@@ -57,7 +58,9 @@ const CartWithItems = ({ products }: Props) => {
           <div>Total:</div>
           <div>${total}</div>
         </div>
-        <button>Process to checkout</button>
+        <Link href="/checkout" className={styles.processToCheckout}>
+          Process to checkout
+        </Link>
       </div>
     </div>
   );

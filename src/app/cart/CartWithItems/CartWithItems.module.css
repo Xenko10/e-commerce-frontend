@@ -48,7 +48,8 @@
   justify-content: space-between;
 }
 
-.total > button {
+.processToCheckout {
+  text-decoration: none;
   align-self: center;
   color: white;
   padding: 1rem 2.5rem;
