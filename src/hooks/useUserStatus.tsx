@@ -11,9 +11,16 @@ const useUserStatus = () => {
     setIsLoggedIn(!!cookies["Exclusive.Token"]);
   }, [cookies]);
 
+  const logout = () => {
+    document.cookie =
+      "Exclusive.Token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    setIsLoggedIn(false);
+  };
+
   return {
     authorization,
     isLoggedIn,
+    logout,
   };
 };
 
