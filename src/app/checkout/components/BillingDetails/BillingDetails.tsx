@@ -14,8 +14,8 @@ const BillingDetails = () => {
   });
 
   return (
-    <div>
-      <h1 className={styles.billingDetails}>Billing Details</h1>
+    <div className={styles.billingDetails}>
+      <h1 className={styles.header}>Billing Details</h1>
       <div className={styles.formWrapper}>
         <BillingInput
           label="Name"

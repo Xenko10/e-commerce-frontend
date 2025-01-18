@@ -8,12 +8,15 @@ type Props = {
 
 const BillingInput = ({ label, value, setValue }: Props) => (
   <div className={styles.billingInput}>
-    <label htmlFor={label}>{label}</label>
+    <label htmlFor={label} className={styles.label}>
+      {label}
+    </label>
     <input
       type="text"
       id={label}
       value={value}
       onChange={(e) => setValue(e.target.value)}
+      className={styles.input}
     />
   </div>
 );
