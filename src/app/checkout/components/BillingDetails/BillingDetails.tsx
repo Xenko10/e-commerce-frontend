@@ -18,27 +18,27 @@ const BillingDetails = () => {
       <h1 className={styles.billingDetails}>Billing Details</h1>
       <div className={styles.formWrapper}>
         <BillingInput
-          label="name"
+          label="Name"
           value={form.name}
           setValue={(value) => setForm({ ...form, name: value })}
         />
         <BillingInput
-          label="street address"
+          label="Street address"
           value={form.streetAddress}
           setValue={(value) => setForm({ ...form, streetAddress: value })}
         />
         <BillingInput
-          label="city"
+          label="City"
           value={form.city}
           setValue={(value) => setForm({ ...form, city: value })}
         />
         <BillingInput
-          label="phone number"
+          label="Phone number"
           value={form.phoneNumber}
           setValue={(value) => setForm({ ...form, phoneNumber: value })}
         />
         <BillingInput
-          label="email"
+          label="Email"
           value={form.email}
           setValue={(value) => setForm({ ...form, email: value })}
         />
