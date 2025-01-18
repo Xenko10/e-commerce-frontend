@@ -6,11 +6,11 @@ import { ProductsListingDto } from "@/types/types";
 import axios from "axios";
 import { API_URL } from "@/helpers/constant";
 import Product from "@/app/components/Product/Product";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { ValuesContext } from "@/app/components/AppLayout/AppLayout";
-import { useCookies } from "react-cookie";
 import { useRouter, useSearchParams } from "next/navigation";
 import Pagination from "./components/Pagination/Pagination";
+import useUserStatus from "@/hooks/useUserStatus";
 
 const Products = () => {
   const router = useRouter();
@@ -31,12 +31,7 @@ const Products = () => {
   const wishlist = context?.wishlist || [];
   const cart = context?.cart || [];
 
-  const [cookies] = useCookies(["Exclusive.Token"]);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    setIsLoggedIn(!!cookies["Exclusive.Token"]);
-  }, [cookies]);
+  const { isLoggedIn } = useUserStatus();
 
   if (Number(page) <= 0) {
     router.push("/products");
