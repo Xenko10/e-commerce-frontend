@@ -4,7 +4,7 @@ import axios from "axios";
 import { API_URL } from "@/helpers/constant";
 import Navbar from "@/app/components/Navbar/Navbar";
 import { createContext, ReactNode } from "react";
-import useUserAuthorization from "@/hooks/useUserAuthorization";
+import useUserStatus from "@/hooks/useUserStatus";
 
 type Props = {
   children: ReactNode;
@@ -20,15 +20,15 @@ type ContextData = {
 export const ValuesContext = createContext<ContextData>(null!);
 
 const AppLayout = ({ children }: Props) => {
-  const userAuthorization = useUserAuthorization();
+  const { authorization } = useUserStatus();
   const { data: wishlistData, refetch: refetchWishlist } = useQuery<
     ProductDTO[]
   >({
-    queryKey: ["wishlist", userAuthorization],
+    queryKey: ["wishlist", authorization],
     queryFn: async () => {
       const response = await axios.get(`${API_URL}/wishlist`, {
         headers: {
-          Authorization: userAuthorization,
+          Authorization: authorization,
         },
       });
       return response.data;
@@ -39,11 +39,11 @@ const AppLayout = ({ children }: Props) => {
 
   const { data: cartData, refetch: refetchCart } = useQuery<ProductInCartDTO[]>(
     {
-      queryKey: ["cart", userAuthorization],
+      queryKey: ["cart", authorization],
       queryFn: async () => {
         const response = await axios.get(`${API_URL}/cart`, {
           headers: {
-            Authorization: userAuthorization,
+            Authorization: authorization,
           },
         });
         return response.data;

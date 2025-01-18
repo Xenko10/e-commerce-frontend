@@ -4,7 +4,7 @@ import { ProductInCartDTO } from "@/types/types";
 import axios from "axios";
 import { API_URL } from "@/helpers/constant";
 import { ValuesContext } from "@/app/components/AppLayout/AppLayout";
-import useUserAuthorization from "@/hooks/useUserAuthorization";
+import useUserStatus from "@/hooks/useUserStatus";
 
 const ProductInCart = ({
   id,
@@ -15,7 +15,7 @@ const ProductInCart = ({
   priceAfterDiscount,
   quantity,
 }: ProductInCartDTO) => {
-  const userAuthorization = useUserAuthorization();
+  const { authorization } = useUserStatus();
   const context = useContext(ValuesContext);
   const refetchCart = context?.refetchCart;
 
@@ -25,7 +25,7 @@ const ProductInCart = ({
   const deleteProductFromCart = async () => {
     await axios.delete(`${API_URL}/cart/${id}`, {
       headers: {
-        Authorization: userAuthorization,
+        Authorization: authorization,
       },
     });
     refetchCart();
@@ -37,7 +37,7 @@ const ProductInCart = ({
       {},
       {
         headers: {
-          Authorization: userAuthorization,
+          Authorization: authorization,
         },
       },
     );

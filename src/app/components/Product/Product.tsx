@@ -7,7 +7,7 @@ import { API_URL } from "@/helpers/constant";
 import { ValuesContext } from "@/app/components/AppLayout/AppLayout";
 import Stars from "./components/Stars";
 import { useCookies } from "react-cookie";
-import useUserAuthorization from "@/hooks/useUserAuthorization";
+import useUserStatus from "@/hooks/useUserStatus";
 
 type Props = {
   id: number;
@@ -34,7 +34,7 @@ const Product = ({
   isInWishlist,
   isInCart,
 }: Props) => {
-  const userAuthorization = useUserAuthorization();
+  const { authorization } = useUserStatus();
   const context = useContext(ValuesContext);
   const refetchWishlist = context?.refetchWishlist;
   const refetchCart = context?.refetchCart;
@@ -54,7 +54,7 @@ const Product = ({
     if (isInWishlist) {
       await axios.delete(`${API_URL}/wishlist/${id}`, {
         headers: {
-          Authorization: userAuthorization,
+          Authorization: authorization,
         },
       });
     } else {
@@ -63,7 +63,7 @@ const Product = ({
         {},
         {
           headers: {
-            Authorization: userAuthorization,
+            Authorization: authorization,
           },
         },
       );
@@ -77,7 +77,7 @@ const Product = ({
     if (isInCart) {
       await axios.delete(`${API_URL}/cart/${id}`, {
         headers: {
-          Authorization: userAuthorization,
+          Authorization: authorization,
         },
       });
     } else {
@@ -86,7 +86,7 @@ const Product = ({
         {},
         {
           headers: {
-            Authorization: userAuthorization,
+            Authorization: authorization,
           },
         },
       );
