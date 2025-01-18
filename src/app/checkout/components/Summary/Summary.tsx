@@ -1,5 +1,5 @@
 import styles from "./Summary.module.css";
-import { FormEvent, useContext } from "react";
+import { useContext } from "react";
 import { ValuesContext } from "@/app/components/AppLayout/AppLayout";
 import SummaryItem from "./SummaryItem/SummaryItem";
 import useCartStatus from "@/hooks/useCartStatus";
