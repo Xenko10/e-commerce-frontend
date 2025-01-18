@@ -8,8 +8,8 @@ const Profile = () => {
   const { isLoggedIn, logout } = useUserStatus();
 
   return (
-    <div className={styles.contentWrapper}>
-      <div>
+    <div>
+      <div className={styles.contentWrapper}>
         <div className={styles.breadcrumbs}>
           <Link href="/" className={styles.home}>
             Home
@@ -17,13 +17,12 @@ const Profile = () => {
           <span className={styles.separator}>/</span>
           <span>My account</span>
         </div>
+        {isLoggedIn && (
+          <button onClick={logout} className={styles.logoutButton}>
+            Log out
+          </button>
+        )}
       </div>
-
-      {isLoggedIn && (
-        <button onClick={logout} className={styles.logoutButton}>
-          Log out
-        </button>
-      )}
     </div>
   );
 };
