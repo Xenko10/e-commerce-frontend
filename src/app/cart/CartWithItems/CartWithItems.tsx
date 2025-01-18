@@ -1,3 +1,4 @@
+import useCartStatus from "@/hooks/useCartStatus";
 import styles from "./CartWithItems.module.css";
 import ProductInCart from "./ProductInCart/ProductInCart";
 import { ProductInCartDTO } from "@/types/types";
@@ -8,18 +9,10 @@ type Props = {
 };
 
 const CartWithItems = ({ products }: Props) => {
-  const subtotal = products.reduce(
-    (sum, addend) =>
-      sum +
-      addend.quantity *
-        (addend.priceAfterDiscount ? addend.priceAfterDiscount : addend.price),
-    0,
-  );
+  const { total, subtotal, shipping, deliveryPrice } = useCartStatus({
+    products,
+  });
 
-  const deliveryPrice = 10;
-  const shipping = subtotal >= 1000 || subtotal === 0 ? 0 : deliveryPrice;
-
-  const total = subtotal + shipping;
   return (
     <div className={styles.cartWithItems}>
       <div className={styles.row}>
