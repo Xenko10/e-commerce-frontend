@@ -5,8 +5,10 @@ import { useContext } from "react";
 import { ValuesContext } from "@/app/components/AppLayout/AppLayout";
 import SummaryItem from "./SummaryItem/SummaryItem";
 import useCartStatus from "@/hooks/useCartStatus";
+import { useRouter } from "next/navigation";
 
 const Summary = () => {
+  const router = useRouter();
   const context = useContext(ValuesContext);
   const cart = context?.cart || [];
 
@@ -15,7 +17,7 @@ const Summary = () => {
   });
 
   const handlePlaceOrder = () => {
-    alert("Order placed!");
+    router.push("/order-placed");
   };
 
   return (
