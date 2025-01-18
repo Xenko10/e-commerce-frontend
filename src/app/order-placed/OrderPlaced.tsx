@@ -1,3 +1,5 @@
+// TODO show order number and give info that
+// order will be realized when payment to certain account is made
 const OrderPlaced = () => {
   return (
     <div>
