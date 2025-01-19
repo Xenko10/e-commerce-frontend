@@ -9,10 +9,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import { API_URL } from "@/helpers/constant";
 import useUserStatus from "@/hooks/useUserStatus";
-
-type PostOrderResponse = {
-  orderId: string;
-};
+import { PostOrderResponse } from "./types/types";
 
 const Checkout = () => {
   const { authorization } = useUserStatus();

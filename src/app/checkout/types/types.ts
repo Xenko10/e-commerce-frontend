@@ -5,3 +5,7 @@ export type FormData = {
   phoneNumber: string;
   email: string;
 };
+
+export type PostOrderResponse = {
+  orderId: string;
+};
