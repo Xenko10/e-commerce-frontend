@@ -32,13 +32,13 @@ const Navbar = () => {
         <button>☰</button>
         <div className={styles.actions}>
           <Link href="/wishlist" className={styles.action}>
-            <img src="./img/navbar/heart.png" alt="Wishlist" />
+            <img src="/img/navbar/heart.png" alt="Wishlist" />
             {wishlist && isLoggedIn && wishlist.length !== 0 && (
               <div>{wishlist.length}</div>
             )}
           </Link>
           <Link href="/cart" className={styles.action}>
-            <img src="./img/navbar/cart.png" alt="Cart" />
+            <img src="/img/navbar/cart.png" alt="Cart" />
             {cart && isLoggedIn && cart.length !== 0 && (
               <div>{cart.length}</div>
             )}

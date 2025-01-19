@@ -39,26 +39,26 @@ const InfoLinks = () => (
         <div className={styles.discount}>Save $3 with App New User Only</div>
         <div className={styles.imgWrapper}>
           <img
-            src="./img/footer/qr_code.png"
+            src="/img/footer/qr_code.png"
             alt="QR code"
             className={styles.qrCode}
           />
           <img
-            src="./img/footer/googleplay.png"
+            src="/img/footer/googleplay.png"
             alt="Google Play"
             className={styles.downloadApp}
           />
           <img
-            src="./img/footer/appstore.png"
+            src="/img/footer/appstore.png"
             alt="App Store"
             className={styles.downloadApp}
           />
         </div>
         <div className={styles.socialsWrapper}>
-          <img src="./img/footer/facebook.png" alt="Facebook" />
-          <img src="./img/footer/twitter.png" alt="Twitter" />
-          <img src="./img/footer/instagram.png" alt="Instagram" />
-          <img src="./img/footer/linkedin.png" alt="Linkedin" />
+          <img src="/img/footer/facebook.png" alt="Facebook" />
+          <img src="/img/footer/twitter.png" alt="Twitter" />
+          <img src="/img/footer/instagram.png" alt="Instagram" />
+          <img src="/img/footer/linkedin.png" alt="Linkedin" />
         </div>
       </div>
     </div>

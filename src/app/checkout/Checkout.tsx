@@ -6,8 +6,17 @@ import BillingDetails from "./components/BillingDetails/BillingDetails";
 import Summary from "./components/Summary/Summary";
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
+import axios from "axios";
+import { API_URL } from "@/helpers/constant";
+import useUserStatus from "@/hooks/useUserStatus";
+
+type PostOrderResponse = {
+  orderId: string;
+};
 
 const Checkout = () => {
+  const { authorization } = useUserStatus();
+
   const router = useRouter();
   const [form, setForm] = useState({
     name: "",
@@ -18,7 +27,7 @@ const Checkout = () => {
   });
   const [error, setError] = useState("");
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (
       form.name.length < 3 ||
@@ -33,7 +42,19 @@ const Checkout = () => {
       }, 4000);
       return;
     }
-    router.push("/order-placed");
+    const { data } = await axios.post<PostOrderResponse>(
+      `${API_URL}/orders`,
+      {
+        ...form,
+      },
+      {
+        headers: {
+          Authorization: authorization,
+        },
+      },
+    );
+    const orderId = data.orderId;
+    router.push(`/order-placed/${orderId}`);
   };
 
   return (
